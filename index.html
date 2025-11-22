@@ -6,6 +6,9 @@
     <title>LIKApos - The Professional POS System, Free For Life</title>
     <meta name="description" content="LIKApos is a professional, free-for-life Point of Sale system. Offline-first, powerful, and works on any device. Start using it today.">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20fill%3D%22%2300E5A0%22%20d%3D%22M64%2032C28.7%2032%200%2060.7%200%2096V416c0%2035.3%2028.7%2064%2064%2064H448c35.3%200%2064-28.7%2064-64V96c0-35.3-28.7-64-64-64H64zM96%20136c0-13.3%2010.7-24%2024-24h96c13.3%200%2024%2010.7%2024%2024v56c0%2013.3-10.7%2024-24%2024H120c-13.3%200-24-10.7-24-24V136zm144%200c0-13.3%2010.7-24%2024-24h96c13.3%200%2024%2010.7%2024%2024v56c0%2013.3-10.7%2024-24%2024H264c-13.3%200-24-10.7-24-24V136zM88%20312c0-13.3%2010.7-24%2024-24H400c13.3%200%2024%2010.7%2024%2024v64c0%2013.3-10.7%2024-24%2024H112c-13.3%200-24-10.7-24-24V312z%22%2F%3E%3C%2Fsvg%3E">
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +21,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
@@ -41,6 +45,9 @@
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
                         'pulse-glow': 'pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glitch-text': 'glitch 3s infinite',
+                        'scan-line': 'scan-line 4s ease-in-out infinite',
+                        'scan-mask': 'scan-mask 4s ease-in-out infinite',
                     },
                     keyframes: {
                         float: {
@@ -50,6 +57,14 @@
                         'pulse-glow': {
                             '0%, 100%': { opacity: '0.5', transform: 'scale(1)' },
                             '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+                        },
+                        'scan-line': {
+                            '0%, 100%': { left: '0%' },
+                            '50%': { left: '100%' }
+                        },
+                        'scan-mask': {
+                            '0%, 100%': { 'clip-path': 'inset(0 100% 0 0)' }, /* Show nothing of dark mode */
+                            '50%': { 'clip-path': 'inset(0 0 0 0)' } /* Show full dark mode */
                         }
                     }
                 }
@@ -238,6 +253,42 @@
             100% { transform: translateY(0); opacity: 1; }
         }
 
+        /* Monitor Styles */
+        .monitor-stand {
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .monitor-screen {
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+            /* Hide scrollbar */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        .monitor-screen::-webkit-scrollbar { 
+            display: none; 
+        }
+        
+        .slide-item {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            z-index: 0;
+        }
+        .slide-active {
+            opacity: 1;
+            z-index: 10;
+        }
+
+        /* Monitor Tilt Container */
+        #monitor-3d-wrap {
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+        }
+
     </style>
 </head>
 <body class="bg-slate-950 text-slate-200 font-sans antialiased selection:bg-indigo-500 selection:text-white overflow-x-hidden">
@@ -257,6 +308,7 @@
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#features" class="hover:text-indigo-400 transition-colors px-3 py-2 text-sm font-medium">Features</a>
                         <a href="#works-everywhere" class="hover:text-indigo-400 transition-colors px-3 py-2 text-sm font-medium">Multi-Platform</a>
+                        <a href="#best-experience" class="hover:text-indigo-400 transition-colors px-3 py-2 text-sm font-medium">Desktop</a>
                         <a href="#free-forever" class="hover:text-indigo-400 transition-colors px-3 py-2 text-sm font-medium">Why Free?</a>
                     </div>
                 </div>
@@ -424,6 +476,121 @@
         </div>
     </section>
 
+    <!-- Best Experience / Monitor Section (NEW) -->
+    <section id="best-experience" class="py-24 bg-gradient-to-b from-slate-950 to-slate-900 border-t border-white/5 relative overflow-hidden perspective-1000">
+        <!-- Decorative background elements -->
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-20"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                
+                <!-- Monitor Graphic -->
+                <div class="w-full lg:w-7/12 reveal-on-scroll">
+                    <!-- Computer Mockup -->
+                    <div class="relative mx-auto max-w-[800px]" id="monitor-3d-wrap">
+                        <!-- Monitor Frame -->
+                        <div class="bg-gray-800 rounded-t-2xl border-[10px] border-gray-800 shadow-2xl relative z-10 overflow-hidden aspect-video">
+                            <!-- Bezel/Camera area -->
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-gray-800/50 z-20"></div>
+                            
+                            <!-- Screen Content -->
+                            <div class="bg-slate-950 w-full h-full relative monitor-screen" id="monitor-slideshow">
+                                <!-- Loading Indicator -->
+                                <div class="absolute inset-0 flex items-center justify-center z-0 text-slate-700">
+                                    <i class="ph ph-spinner animate-spin text-4xl"></i>
+                                </div>
+
+                                <!-- SLIDE 1: SPLIT SCREEN ANIMATION (Dashboard Light vs Dark) -->
+                                <div class="slide-item slide-active" id="slide-split">
+                                    <!-- Light Image (Base) -->
+                                    <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/Dashboard%20Light.jpg" class="absolute inset-0 w-full h-full object-fill">
+                                    
+                                    <!-- Dark Image (Revealed by mask) -->
+                                    <div class="absolute inset-0 overflow-hidden animate-scan-mask">
+                                        <!-- max-w-none ensures the image doesn't squish -->
+                                        <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/Dashboard.jpg" class="absolute w-full h-full max-w-none object-fill" style="width: 100%; height: 100%;">
+                                    </div>
+                                    
+                                    <!-- The Moving Line -->
+                                    <div class="absolute top-0 bottom-0 w-0.5 bg-white/80 shadow-[0_0_15px_rgba(255,255,255,0.9)] z-20 animate-scan-line">
+                                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
+                                            <i class="ph-bold ph-arrows-left-right text-slate-900 text-xs"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SLIDE 2-N: Rest of the JPGs -->
+                                <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/pos.jpg" alt="POS Terminal" class="slide-item object-fill">
+                                <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/analytics.jpg" alt="Analytics" class="slide-item object-fill">
+                                <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/iventory.jpg" alt="Inventory" class="slide-item object-fill">
+                                <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/costomers.jpg" alt="Customers" class="slide-item object-fill">
+                                <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/payment.jpg" alt="Payment" class="slide-item object-fill">
+                                <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/settings.jpg" alt="Settings" class="slide-item object-fill">
+                                
+                                <!-- Overlay Gradient -->
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none z-30"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Monitor Bottom Bezel -->
+                        <div class="bg-gray-800 h-10 rounded-b-md flex items-center justify-center relative z-10 border-t border-gray-700">
+                            <div class="text-gray-600 text-xs font-bold tracking-widest uppercase">LIKA<span class="text-indigo-500">pos</span></div>
+                        </div>
+
+                        <!-- Stand -->
+                        <div class="mx-auto w-32 h-16 bg-gray-700 monitor-stand relative -mt-1 z-0 clip-trapezoid" style="clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);"></div>
+                        <div class="mx-auto w-48 h-2 bg-gray-600 rounded-full shadow-xl"></div>
+                    </div>
+                </div>
+
+                <!-- Text Info -->
+                <div class="w-full lg:w-5/12 reveal-on-scroll">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-6">
+                        <i class="ph-fill ph-desktop"></i>
+                        Pro Tip
+                    </div>
+                    <h2 class="text-4xl font-bold mb-6 leading-tight">
+                        Experience it best on <br>
+                        <span class="text-gradient">Large Screens.</span>
+                    </h2>
+                    <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                        While LIKApos works everywhere, professional cashiers prefer the speed and layout of a desktop environment.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center shrink-0 border border-white/5">
+                                <i class="ph-fill ph-google-chrome-logo text-2xl text-indigo-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg mb-1">Google Chrome</h3>
+                                <p class="text-slate-500 text-sm">We optimized the rendering engine specifically for V8 (Chrome, Brave, Edge) for millisecond-latency responses.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 items-start">
+                            <div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center shrink-0 border border-white/5">
+                                <i class="ph-fill ph-monitor text-2xl text-purple-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-lg mb-1">Desktop & Laptop</h3>
+                                <p class="text-slate-500 text-sm">Keyboard shortcuts and expanded dashboards allow you to manage inventory 3x faster than on mobile.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <a href="https://likapos.pages.dev" target="_blank" class="inline-flex items-center gap-2 text-white font-semibold hover:text-indigo-400 transition-colors">
+                            Open Web App in Browser
+                            <i class="ph-bold ph-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- Pricing / Free Forever Section -->
     <section id="free-forever" class="py-24 relative overflow-hidden">
         <!-- Decorative shapes -->
@@ -435,8 +602,8 @@
             <div id="badge-container-wrapper" class="relative inline-block mb-8 min-h-[80px] flex justify-center items-center">
                 
                 <!-- The Cat Elements -->
-                <div id="cat-head" class="cat-head">🐱</div>
-                <div id="cat-paw" class="cat-paw">🐾</div>
+                <div id="cat-head" class="cat-head">棲</div>
+                <div id="cat-paw" class="cat-paw">誓</div>
 
                 <!-- The Badge -->
                 <div id="cc-badge" class="inline-flex items-center justify-center p-3 rounded-full bg-red-500/10 border border-red-500/20 transition-all duration-300 relative overflow-hidden min-w-[240px] z-10">
@@ -511,7 +678,7 @@
                 </div>
             </div>
             <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-slate-600 text-sm">© 2024 LIKApos. All rights reserved.</p>
+                <p class="text-slate-600 text-sm">ﾂｩ 2024 LIKApos. All rights reserved.</p>
                 <div class="flex gap-4">
                     <a href="#" class="text-slate-600 hover:text-white transition-colors"><i class="ph-fill ph-twitter-logo text-xl"></i></a>
                     <a href="#" class="text-slate-600 hover:text-white transition-colors"><i class="ph-fill ph-facebook-logo text-xl"></i></a>
@@ -535,6 +702,7 @@
             let currentStep = 0;
 
             function rotateDevices() {
+                if(!devices[0]) return;
                 currentStep = (currentStep + 1) % 3;
                 devices.forEach((device, index) => {
                     positions.forEach(pos => device.classList.remove(pos));
@@ -543,6 +711,50 @@
                 });
             }
             setInterval(rotateDevices, 4000);
+
+
+            // --- Monitor Mockup Slideshow Logic ---
+            const slides = document.querySelectorAll('.slide-item');
+            let currentSlide = 0;
+            
+            if(slides.length > 0) {
+                setInterval(() => {
+                    // Hide current
+                    slides[currentSlide].classList.remove('slide-active');
+                    
+                    // Move to next
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    
+                    // Show next
+                    slides[currentSlide].classList.add('slide-active');
+                }, 2500); // Fast slide (2.5s)
+            }
+            
+            // --- Monitor Tilt Logic (3D Mouse Follow) ---
+            const monitorWrap = document.getElementById('monitor-3d-wrap');
+            const monitorContainer = document.querySelector('#best-experience');
+
+            if (monitorWrap && monitorContainer) {
+                monitorContainer.addEventListener('mousemove', (e) => {
+                    const rect = monitorWrap.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    
+                    // Calculate distance from center
+                    const x = e.clientX - centerX;
+                    const y = e.clientY - centerY;
+                    
+                    // Rotate (limit to 10 degrees)
+                    const rotateX = ((y / rect.height) * -10).toFixed(2);
+                    const rotateY = ((x / rect.width) * 10).toFixed(2);
+
+                    monitorWrap.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+
+                monitorContainer.addEventListener('mouseleave', () => {
+                     monitorWrap.style.transform = `rotateX(0deg) rotateY(0deg)`;
+                });
+            }
 
 
             // --- Intersection Observer for Reveal Animations ---
@@ -621,7 +833,6 @@
                                     textContainer.classList.remove('text-swiped'); // Reset pos (hidden by animation, but removing class might snap it back if not careful)
                                     // Actually better to force reset content then drop in
                                     
-                                    // Reset content
                                     textContainer.classList.remove('text-red-400');
                                     textContainer.classList.add('text-green-400');
                                     icon.className = "ph-fill ph-smiley";

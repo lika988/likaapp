@@ -3,68 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIKApos - The Professional POS System, Free For Life</title>
-    <meta name="description" content="LIKApos is a professional, free-for-life Point of Sale system. Offline-first, powerful, and works on any device. Start using it today.">
+    <title>LIKApps | Future Software</title>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20fill%3D%22%2300E5A0%22%20d%3D%22M64%2032C28.7%2032%200%2060.7%200%2096V416c0%2035.3%2028.7%2064%2064%2064H448c35.3%200%2064-28.7%2064-64V96c0-35.3-28.7-64-64-64H64zM96%20136c0-13.3%2010.7-24%2024-24h96c13.3%200%2024%2010.7%2024%2024v56c0%2013.3-10.7%2024-24%2024H120c-13.3%200-24-10.7-24-24V136zm144%200c0-13.3%2010.7-24%2024-24h96c13.3%200%2024%2010.7%2024%2024v56c0%2013.3-10.7%2024-24%2024H264c-13.3%200-24-10.7-24-24V136zM88%20312c0-13.3%2010.7-24%2024-24H400c13.3%200%2024%2010.7%2024%2024v64c0%2013.3-10.7%2024-24%2024H112c-13.3%200-24-10.7-24-24V312z%22%2F%3E%3C%2Fsvg%3E">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Icons (Phosphor) -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Fonts: Inter Tight & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,800;1,400&family=JetBrains+Mono:wght@500;800&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Inter Tight', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
                         brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#4f46e5', // Indigo main
-                            800: '#3730a3',
-                            900: '#1e1b4b', // Deep background
-                        },
-                        accent: {
-                            400: '#a78bfa',
-                            500: '#8b5cf6',
+                            black: '#050505',
+                            dark: '#0A0A0A',
+                            gray: '#171717',
+                            light: '#f3f4f6', 
+                            white: '#FFFFFF',
+                            accent: '#2563eb', 
                         }
                     },
                     animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-glow': 'pulse-glow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'glitch-text': 'glitch 3s infinite',
-                        'scan-line': 'scan-line 4s ease-in-out infinite',
-                        'scan-mask': 'scan-mask 4s ease-in-out infinite',
+                        'float': 'float 8s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'explode-fast': 'explodeFast 0.3s cubic-bezier(0,0,0.2,1) forwards',
+                        'shake': 'shake 0.3s cubic-bezier(.36,.07,.19,.97) both',
+                        'shake-hard': 'shakeHard 0.1s cubic-bezier(.36,.07,.19,.97) infinite',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'swing': 'swing 3s ease-in-out infinite',
+                        'swing-wild': 'swingWild 0.5s ease-in-out infinite',
+                        'cursor-blink': 'cursorBlink 1s step-end infinite',
                     },
                     keyframes: {
                         float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-20px) scale(1.02)' },
                         },
-                        'pulse-glow': {
-                            '0%, 100%': { opacity: '0.5', transform: 'scale(1)' },
-                            '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+                        explodeFast: {
+                            '0%': { transform: 'scale(1)', opacity: '1' },
+                            '50%': { transform: 'scale(2.5) rotate(15deg)', opacity: '0.8' },
+                            '100%': { transform: 'scale(3)', opacity: '0' }
                         },
-                        'scan-line': {
-                            '0%, 100%': { left: '0%' },
-                            '50%': { left: '100%' }
+                        shake: {
+                            '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+                            '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+                            '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+                            '40%, 60%': { transform: 'translate3d(4px, 0, 0)' }
                         },
-                        'scan-mask': {
-                            '0%, 100%': { 'clip-path': 'inset(0 100% 0 0)' }, /* Show nothing of dark mode */
-                            '50%': { 'clip-path': 'inset(0 0 0 0)' } /* Show full dark mode */
+                        shakeHard: {
+                            '0%': { transform: 'translate(2px, 2px) rotate(0deg)' },
+                            '25%': { transform: 'translate(-2px, -2px) rotate(-2deg)' },
+                            '50%': { transform: 'translate(2px, -2px) rotate(2deg)' },
+                            '75%': { transform: 'translate(-2px, 2px) rotate(-2deg)' },
+                            '100%': { transform: 'translate(2px, 2px) rotate(0deg)' }
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        swing: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '25%': { transform: 'rotate(5deg)' },
+                            '50%': { transform: 'rotate(0deg)' },
+                            '75%': { transform: 'rotate(-5deg)' },
+                            '100%': { transform: 'rotate(0deg)' }
+                        },
+                        swingWild: {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '25%': { transform: 'rotate(25deg)' },
+                            '50%': { transform: 'rotate(-25deg)' },
+                            '75%': { transform: 'rotate(15deg)' },
+                            '100%': { transform: 'rotate(0deg)' }
+                        },
+                        cursorBlink: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0' }
                         }
                     }
                 }
@@ -73,819 +96,898 @@
     </script>
 
     <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #3730a3;
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #4f46e5;
+        /* SUPER SMOOTH SCROLL ARCHITECTURE */
+        html {
+            scroll-behavior: smooth !important;
+            /* CRITICAL: Fix header covering content */
+            scroll-padding-top: 130px;
         }
 
-        /* Utility for 3D Transforms */
-        .perspective-1000 {
-            perspective: 1000px;
-        }
-        .preserve-3d {
-            transform-style: preserve-3d;
-        }
-        
-        /* Device Frames */
-        .device-frame {
-            position: absolute;
-            background: #121212;
-            border-radius: 1rem;
-            box-shadow: 
-                0 20px 50px -12px rgba(0, 0, 0, 0.8),
-                0 0 0 1px rgba(255,255,255,0.1);
+        body {
+            height: 100%;
             overflow: hidden;
-            transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
-            transform-origin: center center;
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* The 3 Positions for the Carousel */
-        .device-pos-center {
-            left: 50%;
-            top: 50%;
-            z-index: 30;
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1.1) rotateY(0deg) translateZ(50px);
-            box-shadow: 0 30px 60px -12px rgba(79, 70, 229, 0.5);
-            filter: brightness(1.1);
-        }
-
-        .device-pos-right {
-            left: 80%;
-            top: 50%;
-            z-index: 10;
-            opacity: 0.4;
-            transform: translate(-50%, -50%) scale(0.7) rotateY(-25deg) translateZ(-100px);
-            filter: brightness(0.6) blur(1px);
-        }
-
-        .device-pos-left {
-            left: 20%;
-            top: 50%;
-            z-index: 10;
-            opacity: 0.4;
-            transform: translate(-50%, -50%) scale(0.7) rotateY(25deg) translateZ(-100px);
-            filter: brightness(0.6) blur(1px);
-        }
-
-        /* Mobile Specific Overrides */
-        .frame-mobile {
-            width: 250px;
-            height: 500px;
-            border-radius: 2.5rem;
-            border: 8px solid #1e293b;
-        }
-
-        .frame-tablet {
-            width: 500px;
-            height: 375px;
-            border-radius: 1.5rem;
-            border: 8px solid #1e293b;
-        }
-
-        .frame-desktop {
-            width: 600px;
-            height: 338px;
-            border-radius: 1rem;
-            border: 4px solid #1e293b;
-        }
-
-        /* Responsive Scaling */
-        @media (max-width: 768px) {
-            .frame-mobile { width: 160px; height: 320px; border-width: 4px; }
-            .frame-tablet { width: 300px; height: 225px; border-width: 4px; }
-            .frame-desktop { width: 340px; height: 190px; border-width: 2px; }
-            
-            .device-pos-right { left: 90%; }
-            .device-pos-left { left: 10%; }
-        }
-
-        /* Intersection Observer Animation Classes */
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-        .reveal-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Gradient Text */
-        .text-gradient {
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(to right, #818cf8, #c084fc, #38bdf8);
-        }
-
-        /* --- CHEEKY CAT ANIMATION STYLES --- */
-        
-        /* 1. The Cat Head Peek */
-        .cat-head {
-            position: absolute;
-            top: -45px;
-            right: 40px;
-            font-size: 2.5rem;
-            transform: translateY(40px); /* Hidden behind badge */
-            opacity: 0;
-            z-index: 0; /* Behind badge initially */
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .cat-peek {
-            transform: translateY(0) rotate(-10deg);
-            opacity: 1;
-        }
-
-        /* 2. The Paw Reach */
-        .cat-paw {
-            position: absolute;
-            top: -35px;
-            right: 80px; /* Near text */
-            font-size: 2rem;
-            transform: translateY(50px) translateX(20px); /* Hidden */
-            opacity: 0;
-            z-index: 20; /* In front of text */
-            transition: all 0.3s ease-out;
-        }
-
-        .paw-ready {
-            opacity: 1;
-            transform: translateY(15px) translateX(20px); /* Hovering over text */
-        }
-
-        .paw-swipe {
-            transition: all 0.2s ease-in;
-            transform: translateY(25px) translateX(-100px) rotate(-45deg); /* Violent swipe left */
-        }
-
-        /* 3. The Text Reaction */
-        .text-swiped {
-            display: inline-block;
-            animation: fly-off 0.6s ease-in forwards;
-        }
-
-        @keyframes fly-off {
-            0% { transform: translateX(0) rotate(0); }
-            20% { transform: translateX(-10px) rotate(5deg); } /* Slight nudge */
-            100% { transform: translateX(-300px) rotate(-180deg); opacity: 0; } /* Yeeted */
-        }
-
-        /* 4. New Text Reveal */
-        .text-drop-in {
-            display: inline-block;
-            animation: drop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
-        @keyframes drop-in {
-            0% { transform: translateY(-50px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-
-        /* Monitor Styles */
-        .monitor-stand {
-            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-        .monitor-screen {
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-            /* Hide scrollbar */
+        #snap-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
             scrollbar-width: none; 
             -ms-overflow-style: none;
         }
-        .monitor-screen::-webkit-scrollbar { 
+        
+        #snap-container::-webkit-scrollbar { 
             display: none; 
         }
+
+        .snap-section {
+            scroll-snap-align: start;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            /* CRITICAL: Add padding top so content isn't behind header */
+            padding-top: 120px; 
+            box-sizing: border-box;
+        }
+
+        /* PROFESSIONAL CARD STYLING */
+        .spotlight-card {
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.85); 
+            border: 1px solid rgba(0, 0, 0, 0.08); 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .spotlight-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: rgba(37, 99, 235, 0.2); 
+        }
         
-        .slide-item {
+        .dark .spotlight-card {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: none;
+        }
+
+        /* The moving light */
+        .spotlight-card::before {
+            content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-            z-index: 0;
+            background: radial-gradient(
+                800px circle at var(--mouse-x) var(--mouse-y), 
+                rgba(37, 99, 235, 0.05), 
+                transparent 40%
+            );
+            z-index: 1;
+            opacity: 0; 
+            transition: opacity 0.5s;
+            pointer-events: none;
         }
-        .slide-active {
+
+        .dark .spotlight-card::before {
+             background: radial-gradient(
+                800px circle at var(--mouse-x) var(--mouse-y), 
+                rgba(255, 255, 255, 0.06),
+                transparent 40%
+            );
+        }
+
+        .spotlight-card:hover::before {
             opacity: 1;
-            z-index: 10;
         }
 
-        /* Monitor Tilt Container */
-        #monitor-3d-wrap {
-            transition: transform 0.1s ease-out;
-            transform-style: preserve-3d;
+        /* GRAIN OVERLAY */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03; 
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
+        /* MAGNETIC BUTTON */
+        .magnetic-btn {
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* SWITCHERS - HIGH VISIBILITY */
+        .lang-switch {
+            position: relative;
+            width: 80px; 
+            height: 40px; 
+            background-color: #e5e7eb; 
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px;
+            font-size: 13px;
+            font-weight: 900;
+            color: #000; /* Solid Black */
+            border: 2px solid rgba(0,0,0,0.1);
+        }
+        .dark .lang-switch { 
+            background-color: #1a1a1a; 
+            color: #fff; /* Solid White */
+            border-color: rgba(255,255,255,0.2); 
+        }
+        .lang-switch::after {
+            content: ''; position: absolute; top: 4px; left: 4px; width: 28px; height: 28px;
+            background-color: white; border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        .lang-switch.active::after { transform: translateX(40px); }
+        .dark .lang-switch::after { background-color: #525252; }
+
+        /* THE BUG */
+        #the-bug {
+            position: absolute; font-size: 1.5rem; color: #ef4444;
+            transition: all 0.2s ease-out; cursor: crosshair; z-index: 40;
+        }
+
+        /* HANGING TAG ANIMATION */
+        .price-tag-container {
+            transform-origin: top center;
+            animation: swing 3s ease-in-out infinite;
+        }
+        
+        .spotlight-card:hover .price-tag-container {
+            animation: swingWild 0.4s ease-in-out infinite;
+        }
+
+        /* SCARY MODE OVERLAY */
+        #scary-overlay {
+            position: fixed; inset: 0; background: black; z-index: 99999;
+            display: none; align-items: center; justify-content: center;
+            mix-blend-mode: exclusion;
+        }
+        .scary-active {
+            filter: invert(1) contrast(2);
+        }
+        
+        /* TYPEWRITER CURSOR */
+        .type-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background-color: currentColor;
+            margin-left: 2px;
+            vertical-align: bottom;
+            animation: cursorBlink 1s step-end infinite;
+        }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-200 font-sans antialiased selection:bg-indigo-500 selection:text-white overflow-x-hidden">
+<body class="bg-[#f8f9fa] text-neutral-900 dark:bg-black dark:text-brand-white transition-colors duration-700 font-sans selection:bg-blue-500 selection:text-white">
 
-    <!-- Navbar -->
-    <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-slate-950/80 backdrop-blur-md border-b border-white/5" id="navbar">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center gap-2 group cursor-pointer" onclick="window.location.href='#'">
-                    <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                        <i class="ph ph-cube text-white text-xl"></i>
+    <!-- Noise Texture -->
+    <div class="noise-overlay"></div>
+    
+    <!-- Scary Overlay -->
+    <div id="scary-overlay">
+        <i class="fas fa-ghost text-9xl text-white animate-ping"></i>
+    </div>
+
+    <!-- Navigation (Floating) -->
+    <nav class="fixed top-6 left-0 w-full z-50 px-6">
+        <div class="max-w-6xl mx-auto bg-white/95 dark:bg-brand-gray/90 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl shadow-black/10 relative">
+            
+            <!-- NEW LOGO: Typewriter Effect -->
+            <a href="#hero" class="flex items-center gap-3 group magnetic-btn no-underline min-w-[180px]">
+                <div class="w-10 h-10 bg-black dark:bg-white text-white dark:text-black rounded-xl flex items-center justify-center font-mono font-bold text-lg shadow-md border border-gray-400 dark:border-transparent">
+                    &gt;_
+                </div>
+                <div class="font-bold tracking-tight text-xl flex items-center">
+                    <span class="text-black dark:text-white">LIK</span>
+                    <span id="typewriter-text" class="text-black dark:text-white">Apps</span><span class="type-cursor"></span>
+                </div>
+            </a>
+
+            <!-- CENTER: BUSINESS BUTTON -->
+            <div class="relative group">
+                <a href="#contact" id="business-btn" class="hidden md:flex items-center gap-2 px-6 py-3 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 transition-all cursor-pointer border border-blue-300 dark:border-blue-500/20">
+                    <span data-key="nav.business">Business</span>
+                    <i class="fas fa-briefcase"></i>
+                </a>
+
+                <!-- 30s POPUP (Perfectly Aligned Below) -->
+                <div id="business-popup" class="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-72 bg-blue-600 text-white p-4 rounded-xl shadow-2xl z-50 opacity-0 pointer-events-none transition-all duration-500 transform translate-y-4 border-2 border-white/20">
+                    <!-- Triangle Arrow (Centered) -->
+                    <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-blue-600 rotate-45 border-t border-l border-white/20"></div>
+                    
+                    <!-- Close Icon -->
+                    <button id="close-popup" class="absolute top-2 right-2 text-white/70 hover:text-white transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+
+                    <div class="flex items-start gap-3 pr-4 relative z-10">
+                        <span class="text-3xl">🧛‍♂️</span>
+                        <div>
+                            <p class="text-sm font-bold leading-tight" id="business-popup-text">Don't panic! I don't bite... hard. (Business Only)</p>
+                        </div>
                     </div>
-                    <span class="font-bold text-xl tracking-tight text-white">LIKA<span class="text-indigo-400">pos</span></span>
+                </div>
+            </div>
+
+            <!-- Right Controls -->
+            <div class="flex items-center gap-3 w-[200px] justify-end">
+                
+                <!-- Theme Toggle (BIGGER & VISIBLE) -->
+                <button id="theme-btn" class="w-11 h-11 rounded-full bg-gray-200 dark:bg-white/10 flex items-center justify-center text-black dark:text-white hover:bg-yellow-400/20 hover:text-yellow-600 transition-all magnetic-btn shadow-md border border-gray-300 dark:border-white/20 text-xl">
+                    <i class="fas fa-sun block dark:hidden"></i>
+                    <i class="fas fa-moon hidden dark:block"></i>
+                </button>
+
+                <!-- Language Switch (BIGGER & VISIBLE) -->
+                <div id="lang-switch" class="lang-switch magnetic-btn shadow-inner mx-1" title="Switch Language">
+                    <span>SQ</span>
+                    <span>EN</span>
                 </div>
                 
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#features" class="hover:text-indigo-400 transition-colors px-3 py-2 text-sm font-medium">Features</a>
-                        <a href="#works-everywhere" class="hover:text-indigo-400 transition-colors px-3 py-2 text-sm font-medium">Multi-Platform</a>
-                        <a href="#best-experience" class="hover:text-indigo-400 transition-colors px-3 py-2 text-sm font-medium">Desktop</a>
-                        <a href="#free-forever" class="hover:text-indigo-400 transition-colors px-3 py-2 text-sm font-medium">Why Free?</a>
-                    </div>
-                </div>
+                <!-- Ghost Button (BIGGER & SCARY) -->
+                <button id="funny-mode-btn" class="w-11 h-11 rounded-full bg-gray-200 dark:bg-white/10 flex items-center justify-center text-black dark:text-white hover:bg-red-600 hover:text-white transition-all magnetic-btn shadow-md border border-gray-300 dark:border-white/20 text-xl group relative overflow-hidden" title="???">
+                    <i class="fas fa-ghost group-hover:animate-bounce"></i>
+                </button>
+            </div>
 
-                <div>
-                    <a href="https://likapos.pages.dev" target="_blank" class="bg-white text-slate-900 hover:bg-indigo-50 px-6 py-2.5 rounded-full text-sm font-bold transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transform hover:-translate-y-0.5 flex items-center gap-2">
-                        Use LIKApos
-                        <i class="ph-bold ph-arrow-right"></i>
-                    </a>
+            <!-- Language Popup Hint (First Load) -->
+            <div id="lang-popup" class="absolute top-[85px] right-[80px] bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 shadow-xl rounded-xl p-3 flex items-center gap-3 animate-bounce z-50 transition-opacity duration-500">
+                <div class="absolute -top-1 right-8 w-3 h-3 bg-white dark:bg-neutral-800 border-t border-l border-gray-200 dark:border-neutral-700 rotate-45"></div>
+                <span class="text-xl">🇦🇱</span>
+                <div class="flex flex-col">
+                    <span class="text-xs font-bold whitespace-nowrap text-black dark:text-white">A don shqip?</span>
+                    <span class="text-[10px] text-gray-400 font-mono" id="popup-timer">Closing in 5s</span>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        <!-- Ambient Background Glow -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-indigo-600/20 blur-[120px] rounded-full pointer-events-none z-0 animate-pulse-glow"></div>
+    <!-- SCROLL CONTAINER -->
+    <div id="snap-container">
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
-                
-                <!-- Text Content -->
-                <div class="lg:col-span-5 text-center lg:text-left mb-24 lg:mb-0 reveal-on-scroll">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-6">
-                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                        Version 2.0 Live
+        <!-- SECTION 1: HERO -->
+        <section id="hero" class="snap-section px-6 overflow-hidden">
+            <!-- Background Aurora -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[120px] animate-float pointer-events-none"></div>
+
+            <!-- THE BUG -->
+            <div id="the-bug" class="hidden md:block top-1/4 left-1/4" title="Catch me if you can!"><i class="fas fa-bug"></i></div>
+
+            <div class="text-center max-w-5xl mx-auto relative z-10 animate-[fadeInUp_0.8s_ease-out_forwards]">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/5 dark:bg-blue-500/10 text-blue-600 dark:text-blue-500 text-xs font-bold uppercase tracking-widest mb-8 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                    <span data-key="hero.pill">Ecosystem Active</span>
+                </div>
+
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter leading-none mb-8 text-neutral-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-white dark:to-gray-500">
+                    <span data-key="hero.title_soft">Software.</span><br>
+                    <span data-key="hero.title_unchained">Unchained.</span>
+                </h1>
+
+                <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed font-medium" data-key="hero.desc">
+                    A complete suite of professional tools. <span class="text-blue-600 dark:text-blue-500 font-bold">LIKApos</span> is the ultimate solution: 100% Free, Offline-Capable, and Private. No Cloud subscriptions. No Rent seeking. Just pure code.
+                </p>
+
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="#suite" class="magnetic-btn px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold text-lg hover:scale-105 transition-transform flex items-center justify-center gap-2 shadow-xl shadow-blue-500/10">
+                        <span data-key="hero.cta">Enter The Suite</span> <i class="fas fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 animate-bounce opacity-30 text-black dark:text-white">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </div>
+        </section>
+
+        <!-- SECTION 2: THE SUITE (Bento Grid) -->
+        <section id="suite" class="snap-section px-6 bg-white dark:bg-brand-dark transition-colors">
+            <div class="max-w-7xl mx-auto w-full py-20">
+                <div class="mb-8 flex justify-between items-end">
+                    <div>
+                        <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-2 text-neutral-900 dark:text-white" data-key="suite.title">The Suite</h2>
+                        <p class="text-gray-500 font-medium" data-key="suite.subtitle">Designed for absolute performance.</p>
                     </div>
-                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-                        The Professional POS System, <br>
-                        <span class="text-gradient">Free For Life.</span>
-                    </h1>
-                    <p class="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        No subscriptions. No hidden fees. Just powerful, offline-first business tools optimized for every device you own.
-                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 grid-rows-1 md:grid-rows-2 gap-6 md:h-[650px]">
                     
-                    <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                        <a href="https://likapos.pages.dev" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl text-white font-bold text-lg shadow-lg shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2">
-                            <i class="ph-fill ph-rocket-launch"></i>
-                            Use LIKApos Free
-                        </a>
-                        <a href="#features" class="w-full sm:w-auto px-8 py-4 bg-slate-800/50 border border-slate-700 hover:bg-slate-800 rounded-xl text-slate-200 font-semibold transition-all flex items-center justify-center gap-2 backdrop-blur-sm">
-                            Learn More
-                            <i class="ph-bold ph-caret-down"></i>
-                        </a>
-                    </div>
-                    <p class="mt-4 text-sm text-slate-500 flex items-center justify-center lg:justify-start">
-                        <i class="ph-fill ph-check-circle text-green-500 mr-1"></i>
-                        <span class="flex items-center gap-1">
-                            <span class="font-bold text-white bg-slate-800 px-1 rounded animate-glitch-text glitch-wrapper">NO</span>
-                            Credit Card Required
-                        </span>
-                        <span class="mx-2 text-slate-700">|</span>
-                        <i class="ph-fill ph-check-circle text-green-500 mr-1"></i> Instant Access
-                    </p>
-                </div>
-
-                <!-- 3D Device Animation Container -->
-                <div class="lg:col-span-7 relative h-[500px] sm:h-[600px] perspective-1000">
-                    <div class="w-full h-full relative preserve-3d" id="hero-rotator">
-                        
-                        <!-- Mobile Device (Starts Center) -->
-                        <div id="device-mobile" class="device-frame frame-mobile device-pos-center">
-                            <div class="absolute top-0 w-full h-6 bg-slate-900 z-40 flex justify-center">
-                                <div class="w-16 h-4 bg-black rounded-b-xl"></div>
-                            </div>
-                            <img src="https://ik.imagekit.io/p78ewpzv2/LIKApos/mobile.png" alt="LIKApos Mobile" class="w-full h-full object-fill">
-                        </div>
-
-                        <!-- Tablet Device (Starts Right) -->
-                        <div id="device-tablet" class="device-frame frame-tablet device-pos-right">
-                            <img src="https://ik.imagekit.io/p78ewpzv2/LIKApos/tablet%20rotatedd.png" alt="LIKApos Tablet" class="w-full h-full object-fill bg-slate-900">
-                        </div>
-
-                        <!-- Desktop Device (Starts Left) -->
-                        <div id="device-desktop" class="device-frame frame-desktop device-pos-left flex flex-col overflow-hidden bg-slate-800">
-                            <div class="h-6 bg-slate-900 flex items-center gap-1 px-2 shrink-0 w-full z-20">
-                                <div class="w-2 h-2 rounded-full bg-red-500"></div>
-                                <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
-                                <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                            </div>
-                            <img src="https://ik.imagekit.io/p78ewpzv2/LIKApos/desktop.png" alt="LIKApos Desktop" class="w-full flex-1 object-fill">
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Problem/Solution Bar -->
-    <section class="bg-slate-900 py-12 border-y border-white/5">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-lg font-medium text-slate-300 reveal-on-scroll">
-                <span class="text-slate-500 block sm:inline mb-2 sm:mb-0">Stop paying "rent" on your software.</span>
-                <span class="hidden sm:inline mx-4 text-slate-700">|</span>
-                <span class="text-indigo-400">Start owning your operations.</span>
-            </p>
-        </div>
-    </section>
-
-    <!-- Features Grid -->
-    <section id="features" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20 reveal-on-scroll">
-                <h2 class="text-3xl md:text-5xl font-bold mb-6">Everything you need to run a shop.</h2>
-                <p class="text-xl text-slate-400 max-w-2xl mx-auto">Powerful features usually reserved for expensive enterprise software, now available to everyone.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="bg-slate-900/50 border border-white/5 p-8 rounded-2xl hover:bg-slate-900 hover:border-indigo-500/30 transition-all duration-300 hover:-translate-y-2 group reveal-on-scroll">
-                    <div class="w-14 h-14 bg-indigo-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-500 group-hover:text-white transition-colors text-indigo-400">
-                        <i class="ph-fill ph-lightning text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Lightning Fast POS</h3>
-                    <p class="text-slate-400 leading-relaxed">Optimized code ensures transactions process instantly. No lag, no waiting customers.</p>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="bg-slate-900/50 border border-white/5 p-8 rounded-2xl hover:bg-slate-900 hover:border-indigo-500/30 transition-all duration-300 hover:-translate-y-2 group reveal-on-scroll" style="transition-delay: 100ms;">
-                    <div class="w-14 h-14 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-purple-500 group-hover:text-white transition-colors text-purple-400">
-                        <i class="ph-fill ph-wifi-slash text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Offline-First Security</h3>
-                    <p class="text-slate-400 leading-relaxed">Internet down? No problem. LIKApos stores data locally and syncs automatically when you're back online.</p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="bg-slate-900/50 border border-white/5 p-8 rounded-2xl hover:bg-slate-900 hover:border-indigo-500/30 transition-all duration-300 hover:-translate-y-2 group reveal-on-scroll" style="transition-delay: 200ms;">
-                    <div class="w-14 h-14 bg-blue-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-500 group-hover:text-white transition-colors text-blue-400">
-                        <i class="ph-fill ph-chart-bar text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">In-Depth Analytics</h3>
-                    <p class="text-slate-400 leading-relaxed">Visualize sales trends, track bestsellers, and understand your profit margins with beautiful charts.</p>
-                </div>
-
-                <!-- Feature 4 -->
-                <div class="bg-slate-900/50 border border-white/5 p-8 rounded-2xl hover:bg-slate-900 hover:border-indigo-500/30 transition-all duration-300 hover:-translate-y-2 group reveal-on-scroll">
-                    <div class="w-14 h-14 bg-pink-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-pink-500 group-hover:text-white transition-colors text-pink-400">
-                        <i class="ph-fill ph-package text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Smart Inventory</h3>
-                    <p class="text-slate-400 leading-relaxed">Manage thousands of SKUs effortlessly. Get low-stock alerts and organize by categories.</p>
-                </div>
-
-                <!-- Feature 5 -->
-                <div class="bg-slate-900/50 border border-white/5 p-8 rounded-2xl hover:bg-slate-900 hover:border-indigo-500/30 transition-all duration-300 hover:-translate-y-2 group reveal-on-scroll" style="transition-delay: 100ms;">
-                    <div class="w-14 h-14 bg-orange-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors text-orange-400">
-                        <i class="ph-fill ph-devices text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Multi-Platform</h3>
-                    <p class="text-slate-400 leading-relaxed">Seamless experience on desktop, tablet, or mobile. Your shop travels with you.</p>
-                </div>
-
-                <!-- Feature 6 -->
-                <div class="bg-slate-900/50 border border-white/5 p-8 rounded-2xl hover:bg-slate-900 hover:border-indigo-500/30 transition-all duration-300 hover:-translate-y-2 group reveal-on-scroll" style="transition-delay: 200ms;">
-                    <div class="w-14 h-14 bg-teal-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-teal-500 group-hover:text-white transition-colors text-teal-400">
-                        <i class="ph-fill ph-sliders text-3xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-white">Full Customization</h3>
-                    <p class="text-slate-400 leading-relaxed">Tailor receipts, taxes, and discounts to fit your specific business model perfectly.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Best Experience / Monitor Section (NEW) -->
-    <section id="best-experience" class="py-24 bg-gradient-to-b from-slate-950 to-slate-900 border-t border-white/5 relative overflow-hidden perspective-1000">
-        <!-- Decorative background elements -->
-        <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-20"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-16">
-                
-                <!-- Monitor Graphic -->
-                <div class="w-full lg:w-7/12 reveal-on-scroll">
-                    <!-- Computer Mockup -->
-                    <div class="relative mx-auto max-w-[800px]" id="monitor-3d-wrap">
-                        <!-- Monitor Frame -->
-                        <div class="bg-gray-800 rounded-t-2xl border-[10px] border-gray-800 shadow-2xl relative z-10 overflow-hidden aspect-video">
-                            <!-- Bezel/Camera area -->
-                            <div class="absolute top-0 left-0 right-0 h-1 bg-gray-800/50 z-20"></div>
-                            
-                            <!-- Screen Content -->
-                            <div class="bg-slate-950 w-full h-full relative monitor-screen" id="monitor-slideshow">
-                                <!-- Loading Indicator -->
-                                <div class="absolute inset-0 flex items-center justify-center z-0 text-slate-700">
-                                    <i class="ph ph-spinner animate-spin text-4xl"></i>
-                                </div>
-
-                                <!-- SLIDE 1: SPLIT SCREEN ANIMATION (Dashboard Light vs Dark) -->
-                                <div class="slide-item slide-active" id="slide-split">
-                                    <!-- Light Image (Base) -->
-                                    <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/Dashboard%20Light.jpg" class="absolute inset-0 w-full h-full object-fill">
-                                    
-                                    <!-- Dark Image (Revealed by mask) -->
-                                    <div class="absolute inset-0 overflow-hidden animate-scan-mask">
-                                        <!-- max-w-none ensures the image doesn't squish -->
-                                        <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/Dashboard.jpg" class="absolute w-full h-full max-w-none object-fill" style="width: 100%; height: 100%;">
-                                    </div>
-                                    
-                                    <!-- The Moving Line -->
-                                    <div class="absolute top-0 bottom-0 w-0.5 bg-white/80 shadow-[0_0_15px_rgba(255,255,255,0.9)] z-20 animate-scan-line">
-                                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
-                                            <i class="ph-bold ph-arrows-left-right text-slate-900 text-xs"></i>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- SLIDE 2-N: Rest of the JPGs -->
-                                <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/pos.jpg" alt="POS Terminal" class="slide-item object-fill">
-                                <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/analytics.jpg" alt="Analytics" class="slide-item object-fill">
-                                <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/iventory.jpg" alt="Inventory" class="slide-item object-fill">
-                                <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/costomers.jpg" alt="Customers" class="slide-item object-fill">
-                                <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/payment.jpg" alt="Payment" class="slide-item object-fill">
-                                <img src="https://ik.imagekit.io/bufi/Likapos%20Pic/JPG/settings.jpg" alt="Settings" class="slide-item object-fill">
+                    <!-- LIKApos (Featured - Large) -->
+                    <div id="pos-card" class="spotlight-card md:col-span-2 md:row-span-2 rounded-3xl p-8 md:p-12 flex flex-col justify-between group cursor-pointer transition-all">
+                        <div class="relative z-10">
+                            <div class="flex gap-2 mb-6 items-center">
+                                <span class="px-2 py-1 bg-green-100 dark:bg-green-500/10 text-green-700 dark:text-green-500 text-xs font-bold rounded uppercase border border-green-200 dark:border-green-500/20">Live</span>
                                 
-                                <!-- Overlay Gradient -->
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none z-30"></div>
+                                <!-- THE NEW FUNNY PRICE TAG (Swinging) -->
+                                <div class="relative price-tag-container z-20">
+                                    <div class="w-1 h-4 bg-gray-300 dark:bg-gray-600 mx-auto"></div> <!-- String -->
+                                    <div class="px-3 py-1 bg-yellow-400 text-black text-sm font-black uppercase rounded shadow-lg border-2 border-yellow-500 -rotate-6 transform hover:scale-110 transition-transform cursor-help whitespace-nowrap" id="price-tag-text">
+                                        $0.00
+                                    </div>
+                                </div>
+
+                                <span class="px-2 py-1 bg-purple-100 dark:bg-purple-500/10 text-purple-700 dark:text-purple-500 text-xs font-bold rounded uppercase border border-purple-200 dark:border-purple-500/20 animate-pulse ml-2">v3.1</span>
                             </div>
+                            <h3 class="text-4xl md:text-6xl font-bold mb-4 text-neutral-900 dark:text-white">LIKApos</h3>
+                            
+                            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-lg leading-relaxed mb-4" data-key="pos.desc">
+                                The industry-standard offline-first POS system. Engineered for Windows & Web to run seamlessly on mobile, tablet, and desktop. Includes full inventory tracking.
+                            </p>
                         </div>
                         
-                        <!-- Monitor Bottom Bezel -->
-                        <div class="bg-gray-800 h-10 rounded-b-md flex items-center justify-center relative z-10 border-t border-gray-700">
-                            <div class="text-gray-600 text-xs font-bold tracking-widest uppercase">LIKA<span class="text-indigo-500">pos</span></div>
-                        </div>
+                        <!-- Buttons & Visual -->
+                        <div class="mt-8 flex flex-col md:flex-row items-start md:items-end justify-between relative z-10 gap-6">
+                            <div class="flex flex-col gap-4">
+                                <!-- Preview Button -->
+                                <a href="https://pos-site.likaapps.com/" target="_blank" class="w-fit px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105 active:scale-95 flex items-center gap-2">
+                                    <span data-key="btn.preview">Preview</span> <i class="fas fa-eye text-xs"></i>
+                                </a>
 
-                        <!-- Stand -->
-                        <div class="mx-auto w-32 h-16 bg-gray-700 monitor-stand relative -mt-1 z-0 clip-trapezoid" style="clip-path: polygon(15% 0, 85% 0, 100% 100%, 0% 100%);"></div>
-                        <div class="mx-auto w-48 h-2 bg-gray-600 rounded-full shadow-xl"></div>
-                    </div>
-                </div>
-
-                <!-- Text Info -->
-                <div class="w-full lg:w-5/12 reveal-on-scroll">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider mb-6">
-                        <i class="ph-fill ph-desktop"></i>
-                        Pro Tip
-                    </div>
-                    <h2 class="text-4xl font-bold mb-6 leading-tight">
-                        Experience it best on <br>
-                        <span class="text-gradient">Large Screens.</span>
-                    </h2>
-                    <p class="text-slate-400 text-lg mb-8 leading-relaxed">
-                        While LIKApos works everywhere, professional cashiers prefer the speed and layout of a desktop environment.
-                    </p>
-
-                    <div class="space-y-6">
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center shrink-0 border border-white/5">
-                                <i class="ph-fill ph-google-chrome-logo text-2xl text-indigo-400"></i>
+                                <!-- Platform Icons -->
+                                <div class="flex items-center gap-4 text-gray-400 dark:text-gray-500">
+                                    <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Windows"><i class="fab fa-windows text-xl"></i></a>
+                                    <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Web"><i class="fas fa-globe text-xl"></i></a>
+                                    <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Mobile"><i class="fas fa-mobile-alt text-xl"></i></a>
+                                    <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Tablet"><i class="fas fa-tablet-alt text-xl"></i></a>
+                                    <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Desktop"><i class="fas fa-desktop text-xl"></i></a>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="text-white font-bold text-lg mb-1">Google Chrome</h3>
-                                <p class="text-slate-500 text-sm">We optimized the rendering engine specifically for V8 (Chrome, Brave, Edge) for millisecond-latency responses.</p>
-                            </div>
-                        </div>
 
-                        <div class="flex gap-4 items-start">
-                            <div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center shrink-0 border border-white/5">
-                                <i class="ph-fill ph-monitor text-2xl text-purple-400"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-white font-bold text-lg mb-1">Desktop & Laptop</h3>
-                                <p class="text-slate-500 text-sm">Keyboard shortcuts and expanded dashboards allow you to manage inventory 3x faster than on mobile.</p>
+                            <!-- Interactive Exploding Icon -->
+                            <div class="relative group/icon">
+                                <img 
+                                    id="pos-icon"
+                                    src="https://ik.imagekit.io/bufi/icon%20LIKApos/icon.png?updatedAt=1763904694719" 
+                                    alt="LIKApos Icon" 
+                                    class="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl transition-transform duration-300 hover:scale-110 active:scale-95 cursor-pointer z-20 relative"
+                                    onclick="triggerExplosion(this)"
+                                >
+                                <!-- Scare Text Container -->
+                                <div id="scare-text" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300">
+                                    <span class="text-2xl md:text-3xl font-black text-red-600 dark:text-red-500 uppercase tracking-tighter rotate-[-10deg] drop-shadow-lg" id="scare-msg">
+                                        ARE YOU SCARED?
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-10">
-                        <a href="https://likapos.pages.dev" target="_blank" class="inline-flex items-center gap-2 text-white font-semibold hover:text-indigo-400 transition-colors">
-                            Open Web App in Browser
-                            <i class="ph-bold ph-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing / Free Forever Section -->
-    <section id="free-forever" class="py-24 relative overflow-hidden">
-        <!-- Decorative shapes -->
-        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-indigo-900/20 to-transparent"></div>
-        
-        <div class="max-w-4xl mx-auto px-4 text-center relative z-10 reveal-on-scroll" id="pricing-container">
-            
-            <!-- Container for Funny Cat Animation -->
-            <div id="badge-container-wrapper" class="relative inline-block mb-8 min-h-[80px] flex justify-center items-center">
-                
-                <!-- The Cat Elements -->
-                <div id="cat-head" class="cat-head">棲</div>
-                <div id="cat-paw" class="cat-paw">誓</div>
-
-                <!-- The Badge -->
-                <div id="cc-badge" class="inline-flex items-center justify-center p-3 rounded-full bg-red-500/10 border border-red-500/20 transition-all duration-300 relative overflow-hidden min-w-[240px] z-10">
-                    
-                    <!-- Text Container -->
-                    <div id="badge-text-container" class="font-bold text-sm text-red-400 transition-colors duration-300 flex items-center gap-2">
-                        <i class="ph-fill ph-warning-circle" id="badge-icon"></i>
-                        <span id="badge-text">CREDIT CARD REQUIRED</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <h2 class="text-4xl md:text-6xl font-bold mb-8 text-white">Free. Forever. Serious.</h2>
-            <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
-                We believe essential business tools should be accessible to everyone. LIKApos is completely free to use, with no trial periods and no feature gating.
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
-                <div class="bg-slate-800/50 p-6 rounded-lg border border-white/5">
-                    <div class="text-2xl font-bold text-white mb-1 flex justify-center items-baseline">
-                        $<span class="count-up" data-target="0" data-start="50">50</span>
-                    </div>
-                    <div class="text-sm text-slate-400">Setup Fee</div>
-                </div>
-                <div class="bg-slate-800/50 p-6 rounded-lg border border-white/5">
-                    <div class="text-2xl font-bold text-white mb-1 flex justify-center items-baseline">
-                        $<span class="count-up" data-target="0" data-start="50">50</span>
-                    </div>
-                    <div class="text-sm text-slate-400">Monthly Subscription</div>
-                </div>
-                <div class="bg-slate-800/50 p-6 rounded-lg border border-white/5">
-                    <div class="text-2xl font-bold text-white mb-1">Unlimited</div>
-                    <div class="text-sm text-slate-400">Transactions & Users</div>
-                </div>
-            </div>
-
-            <a href="https://likapos.pages.dev" target="_blank" class="inline-flex items-center justify-center px-10 py-5 text-lg font-bold text-white transition-all duration-200 bg-indigo-600 rounded-full hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 focus:ring-offset-slate-900 shadow-[0_0_30px_rgba(79,70,229,0.5)] hover:shadow-[0_0_50px_rgba(79,70,229,0.7)] hover:scale-105">
-                Start Using LIKApos Now - It's Free
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-white/5 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div class="col-span-1 md:col-span-2">
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                            <i class="ph ph-cube text-white"></i>
+                    <!-- LIKAsys -->
+                    <div class="spotlight-card rounded-3xl p-8 flex flex-col justify-between group relative overflow-hidden hover:-translate-y-1">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 dark:opacity-20 group-hover:opacity-30 dark:group-hover:opacity-40 transition-opacity text-black dark:text-white">
+                            <i class="fas fa-server text-6xl"></i>
                         </div>
-                        <span class="font-bold text-xl text-white">LIKApos</span>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-3 text-neutral-900 dark:text-white">LIKAsys</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-500 leading-relaxed font-medium" data-key="sys.desc">
+                                A specialized Point of Sale engineered for complex I.T. infrastructures. Features deep server integration, multi-node sync, and advanced hardware API.
+                            </p>
+                        </div>
+                        <div class="mt-6">
+                            <div class="w-full bg-gray-200 dark:bg-gray-800 h-1 rounded-full overflow-hidden">
+                                <div class="bg-purple-500 h-full w-[75%]"></div>
+                            </div>
+                            <p class="text-xs text-purple-600 dark:text-purple-500 mt-2 font-mono font-bold">Development: 75%</p>
+                        </div>
                     </div>
-                    <p class="text-slate-400 text-sm max-w-sm">
-                        Empowering small businesses with professional-grade tools without the enterprise price tag. Open the web app and start selling in seconds.
-                    </p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-4">Product</h4>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li><a href="#features" class="hover:text-indigo-400 transition-colors">Features</a></li>
-                        <li><a href="#works-everywhere" class="hover:text-indigo-400 transition-colors">Mobile App</a></li>
-                        <li><a href="#free-forever" class="hover:text-indigo-400 transition-colors">Pricing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-white mb-4">Action</h4>
-                    <ul class="space-y-2 text-sm text-slate-400">
-                        <li><a href="https://likapos.pages.dev" class="text-indigo-400 hover:text-indigo-300 font-semibold">Use Web App</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-slate-600 text-sm">ﾂｩ 2024 LIKApos. All rights reserved.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="text-slate-600 hover:text-white transition-colors"><i class="ph-fill ph-twitter-logo text-xl"></i></a>
-                    <a href="#" class="text-slate-600 hover:text-white transition-colors"><i class="ph-fill ph-facebook-logo text-xl"></i></a>
-                    <a href="#" class="text-slate-600 hover:text-white transition-colors"><i class="ph-fill ph-instagram-logo text-xl"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
 
-    <!-- Scripts -->
+                    <!-- LIKAscan -->
+                    <div class="spotlight-card rounded-3xl p-8 flex flex-col justify-between group relative overflow-hidden hover:-translate-y-1">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 dark:opacity-20 group-hover:opacity-30 dark:group-hover:opacity-40 transition-opacity text-black dark:text-white">
+                            <i class="fas fa-barcode text-6xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-3 text-neutral-900 dark:text-white">LIKAscan</h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-500 leading-relaxed font-medium" data-key="scan.desc">
+                                Next-generation inventory scanning utility. Utilizes camera APIs for ultra-fast barcode recognition, QR parsing, and instant database lookups.
+                            </p>
+                        </div>
+                        <div class="mt-6">
+                            <div class="w-full bg-gray-200 dark:bg-gray-800 h-1 rounded-full overflow-hidden">
+                                <div class="bg-orange-500 h-full w-[30%]"></div>
+                            </div>
+                            <p class="text-xs text-orange-600 dark:text-orange-500 mt-2 font-mono font-bold">Development: 30%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: CONTACT (The Void) -->
+        <section id="contact" class="snap-section px-6 relative bg-[#f3f4f6] dark:bg-black transition-colors">
+            <!-- Footer Content -->
+            <div class="max-w-4xl mx-auto text-center w-full">
+                <h2 class="text-5xl md:text-8xl font-bold tracking-tighter mb-16 hover:text-blue-600 dark:hover:text-blue-500 transition-colors duration-500 cursor-default text-neutral-900 dark:text-white" data-key="footer.title">
+                    Let's Build.
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+                    <!-- Email Card -->
+                    <a href="mailto:likapps@proton.me" class="group spotlight-card rounded-2xl p-10 flex flex-col items-center justify-center transition-transform hover:-translate-y-2">
+                        <i class="fas fa-envelope text-4xl mb-4 text-gray-400 group-hover:text-blue-500 transition-colors"></i>
+                        <span class="text-xl font-bold text-neutral-900 dark:text-white">Email</span>
+                        <span class="text-sm text-gray-500 mt-2 font-mono">likapps@proton.me</span>
+                        
+                        <div class="h-8 overflow-hidden mt-6 w-full relative">
+                            <div class="absolute inset-0 flex flex-col items-center transition-transform duration-300 group-hover:-translate-y-8">
+                                <p class="text-sm text-gray-400 font-medium" data-key="email.normal">Business Inquiries Only</p>
+                                <p class="text-sm text-blue-500 font-bold mt-4" data-key="email.funny">I have lawyers ⚖️</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Instagram Card -->
+                    <a href="https://instagram.com/lika.apps" target="_blank" class="group spotlight-card rounded-2xl p-10 flex flex-col items-center justify-center transition-transform hover:-translate-y-2">
+                        <i class="fab fa-instagram text-4xl mb-4 text-gray-400 group-hover:text-pink-500 transition-colors"></i>
+                        <span class="text-xl font-bold text-neutral-900 dark:text-white">Instagram</span>
+                        <span class="text-sm text-gray-500 mt-2 font-mono">@lika.apps</span>
+                        
+                        <div class="h-8 overflow-hidden mt-6 w-full relative">
+                            <div class="absolute inset-0 flex flex-col items-center transition-transform duration-300 group-hover:-translate-y-8">
+                                <p class="text-sm text-gray-400 font-medium" data-key="insta.normal">Follow the journey</p>
+                                <p class="text-sm text-pink-500 font-bold mt-4" data-key="insta.funny">Influencer Mode 🤳</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="flex justify-between items-center text-xs text-gray-500 font-mono border-t border-gray-300 dark:border-gray-800 pt-8">
+                    <span>© <span id="year"></span> LIKApps</span>
+                    <span class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        Servers: Offline (Local Only)
+                    </span>
+                    <span>Kosovo 🇽🇰</span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Hero Section Rotator Logic ---
-            const devices = [
-                document.getElementById('device-mobile'),
-                document.getElementById('device-tablet'),
-                document.getElementById('device-desktop')
-            ];
-            
-            const positions = ['device-pos-center', 'device-pos-right', 'device-pos-left'];
-            let currentStep = 0;
-
-            function rotateDevices() {
-                if(!devices[0]) return;
-                currentStep = (currentStep + 1) % 3;
-                devices.forEach((device, index) => {
-                    positions.forEach(pos => device.classList.remove(pos));
-                    const posIndex = (index - currentStep + 3) % 3;
-                    device.classList.add(positions[posIndex]);
-                });
+        // --- 1. LANGUAGE & DATA ---
+        const i18n = {
+            en: {
+                "hero.pill": "Ecosystem Active",
+                "hero.title_soft": "Software.",
+                "hero.title_unchained": "Unchained.",
+                "hero.desc": "A complete suite of professional tools. <span class='text-blue-600 dark:text-blue-500 font-bold'>LIKApos</span> is the ultimate solution: 100% Free, Offline-Capable, and Private. No Cloud subscriptions. No Rent seeking. Just pure code.",
+                "hero.cta": "Enter The Suite",
+                "suite.title": "The Suite",
+                "suite.subtitle": "Designed for absolute performance.",
+                "pos.desc": "The industry-standard offline-first POS system. Engineered for Windows & Web to run seamlessly on mobile, tablet, and desktop. Includes full inventory tracking.",
+                "btn.launch": "Launch WebApp",
+                "btn.preview": "Preview",
+                "nav.business": "Business",
+                "sys.desc": "A specialized Point of Sale engineered for complex I.T. infrastructures. Features deep server integration, multi-node sync, and advanced hardware API.",
+                "scan.desc": "Next-generation inventory scanning utility. Utilizes camera APIs for ultra-fast barcode recognition, QR parsing, and instant database lookups.",
+                "footer.title": "Let's Build.",
+                "email.normal": "Business Inquiries Only",
+                "email.funny": "I have lawyers ⚖️",
+                "insta.normal": "Follow the journey",
+                "insta.funny": "Influencer Mode 🤳",
+                "popup.business": "Don't panic! I don't bite... hard. (Business Only)",
+                "price.default": "$0.00"
+            },
+            sq: {
+                "hero.pill": "Ekosistemi Aktiv",
+                "hero.title_soft": "Softuer.",
+                "hero.title_unchained": "Pa Zinxhirë.", 
+                "hero.title_unchained_alt": "Pa Pronarë.", 
+                "hero.desc": "Një suitë e plotë mjetesh profesionale. <span class='text-blue-600 dark:text-blue-500 font-bold'>LIKApos</span> është zgjidhja përfundimtare: 100% Falas, Offline dhe Privat. Pa abonime në Cloud. Pa qira mujore. Vetëm kod i pastër.",
+                "hero.cta": "Hyni në Paketë",
+                "suite.title": "Paketa",
+                "suite.subtitle": "Dizajnuar për performancë absolute.",
+                "pos.desc": "Sistemi standard POS offline-first. E inxhinieruar për Windows & Web që të funksionojë pa probleme në celular, tablet dhe desktop. Përfshin gjurmimin e plotë të inventarit.",
+                "btn.launch": "Hap WebApp",
+                "btn.preview": "Shiko",
+                "nav.business": "Biznes",
+                "sys.desc": "Një Pikë Shitje (POS) e specializuar për infrastruktura komplekse T.I. Përmban integrim të thellë të serverit, sinkronizim me shumë nyje dhe mbështetje të avancuar API.",
+                "scan.desc": "Mjeti i gjeneratës tjetër për skanimin e inventarit. Përdor API-të e kamerës për njohjen ultra të shpejtë të barkodit, analizimin e QR dhe kërkimet e menjëhershme.",
+                "footer.title": "Le të Ndërtojmë.",
+                "email.normal": "Vetëm Për Biznes",
+                "email.funny": "Kam avokatë ⚖️",
+                "insta.normal": "Na ndiqni rrugëtimin",
+                "insta.funny": "Tu bo si Influencer 🤳",
+                "popup.business": "Mos u tut! S'të ha... krejt. (Vetëm Biznes)",
+                "price.default": "$0.00"
             }
-            setInterval(rotateDevices, 4000);
+        };
 
+        const funnyPriceTexts = {
+            en: ["STEAL IT!", "ROBBERY", "0% APR", "CHEAPER THAN AIR", "TAKE IT", "WHY WAIT?", "FREE.99"],
+            sq: ["SKA VJEDHJE", "00 GJITH", "S'KA HILE", "MERRE FAL", "S'KA QIRA", "MA LIR S'KA", "BADIHAVA"]
+        };
 
-            // --- Monitor Mockup Slideshow Logic ---
-            const slides = document.querySelectorAll('.slide-item');
-            let currentSlide = 0;
+        let currentLang = 'en';
+
+        // --- 2. HELPER: SCRAMBLE TEXT (MATRIX EFFECT) ---
+        function animateTextChange(element, newHtml) {
+            // Set HTML immediately so layout is correct and we can access text nodes
+            element.innerHTML = newHtml;
             
-            if(slides.length > 0) {
-                setInterval(() => {
-                    // Hide current
-                    slides[currentSlide].classList.remove('slide-active');
-                    
-                    // Move to next
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    
-                    // Show next
-                    slides[currentSlide].classList.add('slide-active');
-                }, 2500); // Fast slide (2.5s)
+            // Traverse and find all text nodes
+            const textNodes = [];
+            function findTextNodes(node) {
+                if (node.nodeType === 3 && node.nodeValue.trim() !== '') {
+                    textNodes.push({ node: node, original: node.nodeValue });
+                    // Start with scrambled text of same length
+                    let scrambled = '';
+                    const chars = '!<>-_\\/[]{}—=+*^?#';
+                    for(let i=0; i<node.nodeValue.length; i++) scrambled += chars[Math.floor(Math.random()*chars.length)];
+                    node.nodeValue = scrambled;
+                } else {
+                    node.childNodes.forEach(findTextNodes);
+                }
             }
+            findTextNodes(element);
+
+            // Animate
+            textNodes.forEach(item => {
+                const finalString = item.original;
+                const length = finalString.length;
+                let iteration = 0;
+                const totalIterations = 10; // Fast scramble
+                
+                const interval = setInterval(() => {
+                    let result = '';
+                    const chars = '!<>-_\\/[]{}—=+*^?#';
+                    
+                    for(let i = 0; i < length; i++) {
+                        // Logic: Reveal characters from left to right gradually
+                        if(i < (iteration / totalIterations) * length) {
+                            result += finalString[i];
+                        } else {
+                            result += chars[Math.floor(Math.random() * chars.length)];
+                        }
+                    }
+                    
+                    item.node.nodeValue = result;
+                    iteration++;
+                    
+                    if (iteration > totalIterations) {
+                        clearInterval(interval);
+                        item.node.nodeValue = finalString; // Ensure exact final text
+                    }
+                }, 40); // Speed of scramble updates
+            });
+        }
+
+        // --- 3. SPOTLIGHT EFFECT LOGIC ---
+        function initSpotlight() {
+            const cards = document.querySelectorAll(".spotlight-card");
+            document.onmousemove = e => {
+                for(const card of cards) {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty("--mouse-x", `${x}px`);
+                    card.style.setProperty("--mouse-y", `${y}px`);
+                }
+            };
+        }
+
+        // --- 4. KOSOVO TIME & THEME INITIALIZATION ---
+        let manualThemeOverride = false;
+
+        function updateKosovoTime() {
+            const date = new Date().toLocaleString("en-US", {timeZone: "Europe/Belgrade"});
+            const now = new Date(date);
+            const hours = now.getHours();
+            const mins = now.getMinutes().toString().padStart(2, '0');
             
-            // --- Monitor Tilt Logic (3D Mouse Follow) ---
-            const monitorWrap = document.getElementById('monitor-3d-wrap');
-            const monitorContainer = document.querySelector('#best-experience');
-
-            if (monitorWrap && monitorContainer) {
-                monitorContainer.addEventListener('mousemove', (e) => {
-                    const rect = monitorWrap.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    
-                    // Calculate distance from center
-                    const x = e.clientX - centerX;
-                    const y = e.clientY - centerY;
-                    
-                    // Rotate (limit to 10 degrees)
-                    const rotateX = ((y / rect.height) * -10).toFixed(2);
-                    const rotateY = ((x / rect.width) * 10).toFixed(2);
-
-                    monitorWrap.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                });
-
-                monitorContainer.addEventListener('mouseleave', () => {
-                     monitorWrap.style.transform = `rotateX(0deg) rotateY(0deg)`;
-                });
+            // Theme Logic
+            if (!manualThemeOverride) {
+                const isNight = hours >= 18 || hours < 6;
+                const html = document.documentElement;
+                if (isNight) {
+                    if(!html.classList.contains('dark')) html.classList.add('dark');
+                } else {
+                    if(html.classList.contains('dark')) html.classList.remove('dark');
+                }
             }
+        }
 
+        function toggleTheme() {
+            manualThemeOverride = true;
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+        }
 
-            // --- Intersection Observer for Reveal Animations ---
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
+        // --- 5. MAGNETIC BUTTONS ---
+        function initMagneticButtons() {
+            const btns = document.querySelectorAll('.magnetic-btn');
+            btns.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0px, 0px)';
+                });
+            });
+        }
+        
+        // --- 6. THE BUG LOGIC ---
+        function initBug() {
+            const bug = document.getElementById('the-bug');
+            if(!bug) return;
+
+            bug.addEventListener('mouseenter', () => {
+                const parentW = window.innerWidth;
+                const parentH = window.innerHeight;
+                
+                const newX = Math.random() * (parentW - 100);
+                const newY = Math.random() * (parentH - 100);
+                
+                bug.style.left = `${newX}px`;
+                bug.style.top = `${newY}px`;
+                bug.style.transform = `rotate(${Math.random() * 360}deg)`;
+            });
+
+            bug.addEventListener('click', () => {
+                bug.innerHTML = '<i class="fas fa-skull"></i>'; 
+                bug.style.color = 'black';
+                bug.style.pointerEvents = 'none'; 
+                setTimeout(() => {
+                    bug.innerHTML = '<i class="fas fa-bug"></i>'; 
+                    bug.style.color = '#ef4444';
+                    bug.style.pointerEvents = 'auto';
+                }, 3000);
+            });
+        }
+
+        // --- 7. SOUND & EXPLOSION LOGIC ---
+        function playExplosionSound() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) return;
+            const ctx = new AudioContext();
+            const bufferSize = ctx.sampleRate * 2;
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            const noise = ctx.createBufferSource();
+            noise.buffer = buffer;
+            const filter = ctx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(1000, ctx.currentTime);
+            filter.frequency.exponentialRampToValueAtTime(10, ctx.currentTime + 0.5);
+            const gain = ctx.createGain();
+            gain.gain.setValueAtTime(2, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(ctx.destination);
+            noise.start();
+        }
+
+        function playScarySound() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) return;
+            const ctx = new AudioContext();
+            const osc = ctx.createOscillator();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(100, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.2);
+            const gain = ctx.createGain();
+            gain.gain.setValueAtTime(1, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+        }
+
+        function triggerExplosion(element) {
+            playExplosionSound();
+            const msg = currentLang === 'sq' ? "A U TUTE?" : "ARE YOU SCARED?";
+            const textEl = document.getElementById('scare-msg');
+            const container = document.getElementById('scare-text');
+            const card = document.getElementById('pos-card');
+            textEl.innerText = msg;
+            element.classList.add('animate-explode-fast');
+            card.classList.add('animate-shake');
+            setTimeout(() => { container.classList.remove('opacity-0'); }, 100);
+            setTimeout(() => {
+                element.classList.remove('animate-explode-fast');
+                card.classList.remove('animate-shake');
+                container.classList.add('opacity-0');
+            }, 3000);
+        }
+
+        // --- 8. POPUP & LOGIC ---
+        function initLanguagePopup() {
+            const popup = document.getElementById('lang-popup');
+            const timerEl = document.getElementById('popup-timer');
+            let timeLeft = 5;
+            const interval = setInterval(() => {
+                timeLeft--;
+                timerEl.innerText = `Closing in ${timeLeft}s`;
+                if(timeLeft <= 0) {
+                    clearInterval(interval);
+                    popup.classList.add('opacity-0');
+                    setTimeout(() => popup.remove(), 500);
+                }
+            }, 1000);
+        }
+
+        function initBusinessPopup() {
+            const popup = document.getElementById('business-popup');
+            const closeBtn = document.getElementById('close-popup');
+            const closePopup = () => {
+                popup.classList.remove('animate-bounce');
+                popup.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+            };
+            closeBtn.addEventListener('click', closePopup);
+            setTimeout(() => {
+                if(popup) {
+                     popup.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                     popup.classList.add('animate-bounce');
+                     setTimeout(() => popup.classList.remove('animate-bounce'), 5000);
+                     setTimeout(closePopup, 20000); 
+                }
+            }, 30000); 
+        }
+
+        function initFunnyPriceTag() {
+            const el = document.getElementById('price-tag-text');
+            const card = document.getElementById('pos-card');
+            if(!el || !card) return;
+            card.addEventListener('mouseenter', () => {
+                const texts = funnyPriceTexts[currentLang];
+                const randomText = texts[Math.floor(Math.random() * texts.length)];
+                el.innerText = randomText;
+                el.classList.add('bg-red-500', 'text-white');
+                el.classList.remove('bg-yellow-400', 'text-black');
+            });
+            card.addEventListener('mouseleave', () => {
+                el.innerText = "$0.00";
+                el.classList.remove('bg-red-500', 'text-white');
+                el.classList.add('bg-yellow-400', 'text-black');
+            });
+        }
+
+        function triggerScaryMode() {
+            const overlay = document.getElementById('scary-overlay');
+            playScarySound();
+            document.body.classList.add('animate-shake-hard');
+            document.documentElement.classList.add('scary-active');
+            overlay.style.display = 'flex';
+            setTimeout(() => {
+                document.body.classList.remove('animate-shake-hard');
+                document.documentElement.classList.remove('scary-active');
+                overlay.style.display = 'none';
+            }, 400);
+        }
+
+        // --- 9. CUSTOM LOGO TYPEWRITER LOGIC ---
+        function initTypewriter() {
+            const el = document.getElementById('typewriter-text');
+            if(!el) return;
+
+            const cycle = async () => {
+                // 1. Start: "Apps" (Normal Color)
+                el.textContent = "Apps";
+                el.className = "text-black dark:text-white"; 
+                await wait(2500); // Stay longer
+
+                // 2. Delete "pps" -> Leaves "A"
+                await typeString(el, "pps", true); 
+                await wait(600); // Pause on "LIKA"
+
+                // 3. Delete "A" -> Leaves ""
+                await typeString(el, "A", true);
+                await wait(200);
+
+                // 4. Switch Color -> Type "Apps" (Blue)
+                el.className = "text-blue-600 dark:text-blue-500 font-bold";
+                await typeString(el, "Apps", false); 
+                await wait(3000); // Stay blue longer
+
+                // 5. Delete "Apps" (Blue) -> Leaves ""
+                await typeString(el, "Apps", true);
+                await wait(300);
+
+                // Loop
+                cycle();
             };
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('reveal-visible');
-                        observer.unobserve(entry.target); 
+            cycle();
+        }
+
+        function wait(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // Type/Delete with random speed variance for "human" feel
+        function typeString(element, text, isDeleting) {
+            return new Promise(async resolve => {
+                const chars = text.split('');
+                if(isDeleting) {
+                    for (let i = 0; i < chars.length; i++) {
+                        element.textContent = element.textContent.slice(0, -1);
+                        // Randomize delete speed (50-100ms)
+                        await wait(50 + Math.random() * 50);
                     }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.reveal-on-scroll').forEach(el => {
-                observer.observe(el);
-            });
-
-            // --- Cheeky Cat Animation Logic ---
-            const pricingObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        startCheekyCatAnimation();
-                        triggerCounters();
-                        pricingObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            const pricingContainer = document.getElementById('pricing-container');
-            if(pricingContainer) pricingObserver.observe(pricingContainer);
-
-            function startCheekyCatAnimation() {
-                const badge = document.getElementById('cc-badge');
-                const textContainer = document.getElementById('badge-text-container');
-                const icon = document.getElementById('badge-icon');
-                const textSpan = document.getElementById('badge-text');
-                const catHead = document.getElementById('cat-head');
-                const catPaw = document.getElementById('cat-paw');
-
-                setInterval(() => {
-                    // 0ms: Reset State
-                    badge.className = "inline-flex items-center justify-center p-3 rounded-full bg-red-500/10 border border-red-500/20 transition-all duration-300 relative overflow-hidden min-w-[240px] z-10";
-                    textContainer.className = "font-bold text-sm text-red-400 transition-colors duration-300 flex items-center gap-2";
-                    icon.className = "ph-fill ph-warning-circle";
-                    textSpan.innerText = "CREDIT CARD REQUIRED";
-                    
-                    // Hide anims
-                    catHead.classList.remove('cat-peek');
-                    catPaw.classList.remove('paw-ready', 'paw-swipe');
-                    textContainer.classList.remove('text-swiped', 'text-drop-in');
-                    textContainer.style.opacity = '1';
-
-                    // 1000ms: Cat Peeks
-                    setTimeout(() => {
-                        catHead.classList.add('cat-peek');
-                        
-                        // 1500ms: Paw Ready
-                        setTimeout(() => {
-                            catPaw.classList.add('paw-ready');
-
-                            // 2000ms: SWIPE!
-                            setTimeout(() => {
-                                catPaw.classList.add('paw-swipe');
-                                textContainer.classList.add('text-swiped'); // Text flies off
-
-                                // 2400ms: New Text Drops In & Color Change
-                                setTimeout(() => {
-                                    badge.classList.remove('bg-red-500/10', 'border-red-500/20');
-                                    badge.classList.add('bg-green-500/10', 'border-green-500/20');
-                                    
-                                    textContainer.classList.remove('text-swiped'); // Reset pos (hidden by animation, but removing class might snap it back if not careful)
-                                    // Actually better to force reset content then drop in
-                                    
-                                    textContainer.classList.remove('text-red-400');
-                                    textContainer.classList.add('text-green-400');
-                                    icon.className = "ph-fill ph-smiley";
-                                    textSpan.innerText = "NOPE, IT'S FREE";
-                                    
-                                    textContainer.classList.add('text-drop-in');
-
-                                    // Retreat Cat
-                                    catHead.classList.remove('cat-peek');
-                                    catPaw.classList.remove('paw-ready', 'paw-swipe');
-
-                                }, 400);
-
-                            }, 500);
-
-                        }, 500);
-
-                    }, 1000);
-
-                }, 4000); // 4s Loop
-            }
-
-            function triggerCounters() {
-                const counters = document.querySelectorAll('.count-up');
-                counters.forEach(counter => {
-                    const start = parseInt(counter.getAttribute('data-start'));
-                    const target = parseInt(counter.getAttribute('data-target'));
-                    const duration = 2000; 
-                    const startTime = performance.now();
-
-                    function updateCount(currentTime) {
-                        const elapsed = currentTime - startTime;
-                        const progress = Math.min(elapsed / duration, 1);
-                        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-                        const currentVal = Math.floor(start - (easeOutQuart * (start - target)));
-                        counter.innerText = currentVal;
-                        if (progress < 1) requestAnimationFrame(updateCount);
-                        else counter.innerText = target;
-                    }
-                    requestAnimationFrame(updateCount);
-                });
-            }
-
-            // --- Navbar Scroll ---
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 20) {
-                    navbar.classList.add('shadow-lg', 'bg-slate-950/90');
                 } else {
-                    navbar.classList.remove('shadow-lg');
+                    for (let i = 0; i < chars.length; i++) {
+                        element.textContent += chars[i];
+                        // Randomize typing speed (80-150ms)
+                        await wait(80 + Math.random() * 70);
+                    }
                 }
+                resolve();
             });
+        }
+
+        // --- 10. INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initSpotlight();
+            initMagneticButtons();
+            initBug();
+            initLanguagePopup();
+            initBusinessPopup();
+            initFunnyPriceTag();
+            initTypewriter();
+            
+            updateKosovoTime(); 
+            setInterval(updateKosovoTime, 1000); 
+            
+            document.getElementById('theme-btn').addEventListener('click', toggleTheme);
+            document.getElementById('year').innerText = new Date().getFullYear();
+
+            const langSwitch = document.getElementById('lang-switch');
+            
+            langSwitch.addEventListener('click', () => {
+                langSwitch.classList.toggle('active');
+                currentLang = currentLang === 'en' ? 'sq' : 'en';
+                
+                document.querySelectorAll('[data-key]').forEach(el => {
+                    const key = el.getAttribute('data-key');
+                    let newText = "";
+
+                    if (key === 'hero.title_unchained' && currentLang === 'sq') {
+                         newText = "Pa Pronarë.";
+                    } else if(i18n[currentLang][key]) {
+                        newText = i18n[currentLang][key];
+                    }
+
+                    // TRIGGER THE "WRRRRRR" MATRIX EFFECT
+                    if(newText) animateTextChange(el, newText);
+                });
+
+                const bizPopupText = document.getElementById('business-popup-text');
+                if(bizPopupText) animateTextChange(bizPopupText, i18n[currentLang]['popup.business']);
+            });
+
+            const funnyBtn = document.getElementById('funny-mode-btn');
+            funnyBtn.addEventListener('click', triggerScaryMode);
         });
+
     </script>
 </body>
 </html>

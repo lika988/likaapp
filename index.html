@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>LIKApps | Future Software</title>
     
     <!-- Tailwind CSS -->
@@ -99,41 +99,62 @@
         /* SUPER SMOOTH SCROLL ARCHITECTURE */
         html {
             scroll-behavior: smooth !important;
-            /* CRITICAL: Fix header covering content */
-            scroll-padding-top: 130px;
+            scroll-padding-top: 100px; /* Reduced for mobile */
         }
 
         body {
             height: 100%;
-            overflow: hidden;
             margin: 0;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
+        /* DEFAULT (Mobile First): No snap, allow natural scroll */
         #snap-container {
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
-            scrollbar-width: none; 
-            -ms-overflow-style: none;
-        }
-        
-        #snap-container::-webkit-scrollbar { 
-            display: none; 
+            height: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-snap-type: none;
+            padding-bottom: 20px;
         }
 
         .snap-section {
-            scroll-snap-align: start;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            /* CRITICAL: Add padding top so content isn't behind header */
-            padding-top: 120px; 
+            min-height: auto; 
+            padding-top: 100px; 
+            padding-bottom: 40px;
             box-sizing: border-box;
+        }
+
+        /* DESKTOP (md and up): Enable Scroll Snapping */
+        @media (min-width: 768px) {
+            body {
+                overflow: hidden;
+            }
+            
+            #snap-container {
+                height: 100vh;
+                overflow-y: scroll;
+                scroll-snap-type: y mandatory;
+                scroll-behavior: smooth;
+                scrollbar-width: none; 
+                -ms-overflow-style: none;
+            }
+            
+            #snap-container::-webkit-scrollbar { 
+                display: none; 
+            }
+
+            .snap-section {
+                scroll-snap-align: start;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                padding-top: 120px; 
+                padding-bottom: 0;
+            }
         }
 
         /* PROFESSIONAL CARD STYLING */
@@ -210,8 +231,8 @@
         /* SWITCHERS - HIGH VISIBILITY */
         .lang-switch {
             position: relative;
-            width: 80px; 
-            height: 40px; 
+            width: 60px; /* Smaller for mobile */
+            height: 32px; 
             background-color: #e5e7eb; 
             border-radius: 9999px;
             cursor: pointer;
@@ -219,24 +240,47 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 10px;
-            font-size: 13px;
+            padding: 0 6px;
+            font-size: 10px;
             font-weight: 900;
             color: #000; /* Solid Black */
             border: 2px solid rgba(0,0,0,0.1);
         }
+        
+        @media (min-width: 768px) {
+            .lang-switch {
+                width: 70px;
+                height: 36px;
+                padding: 0 8px;
+                font-size: 11px;
+            }
+        }
+
         .dark .lang-switch { 
             background-color: #1a1a1a; 
             color: #fff; /* Solid White */
             border-color: rgba(255,255,255,0.2); 
         }
         .lang-switch::after {
-            content: ''; position: absolute; top: 4px; left: 4px; width: 28px; height: 28px;
+            content: ''; position: absolute; top: 3px; left: 3px; 
+            width: 22px; height: 22px;
             background-color: white; border-radius: 50%;
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
             transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
         }
-        .lang-switch.active::after { transform: translateX(40px); }
+        
+        @media (min-width: 768px) {
+            .lang-switch::after {
+                top: 4px; left: 4px; 
+                width: 24px; height: 24px;
+            }
+        }
+
+        .lang-switch.active::after { transform: translateX(28px); }
+        @media (min-width: 768px) {
+            .lang-switch.active::after { transform: translateX(34px); }
+        }
+
         .dark .lang-switch::after { background-color: #525252; }
 
         /* THE BUG */
@@ -275,6 +319,11 @@
             vertical-align: bottom;
             animation: cursorBlink 1s step-end infinite;
         }
+
+        #glass-popup {
+            pointer-events: none; 
+            transition: opacity 0.5s ease-out;
+        }
     </style>
 </head>
 <body class="bg-[#f8f9fa] text-neutral-900 dark:bg-black dark:text-brand-white transition-colors duration-700 font-sans selection:bg-blue-500 selection:text-white">
@@ -288,37 +337,33 @@
     </div>
 
     <!-- Navigation (Floating) -->
-    <nav class="fixed top-6 left-0 w-full z-50 px-6">
-        <div class="max-w-6xl mx-auto bg-white/95 dark:bg-brand-gray/90 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-full px-6 py-4 flex justify-between items-center shadow-2xl shadow-black/10 relative">
+    <nav class="fixed top-2 md:top-6 left-0 w-full z-50 px-2 md:px-6">
+        <div class="max-w-6xl mx-auto bg-white/95 dark:bg-brand-gray/90 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-full px-3 md:px-6 py-2 md:py-4 flex justify-between items-center shadow-2xl shadow-black/10 relative">
             
             <!-- NEW LOGO: Typewriter Effect -->
-            <a href="#hero" class="flex items-center gap-3 group magnetic-btn no-underline min-w-[180px]">
-                <div class="w-10 h-10 bg-black dark:bg-white text-white dark:text-black rounded-xl flex items-center justify-center font-mono font-bold text-lg shadow-md border border-gray-400 dark:border-transparent">
+            <a href="#hero" class="flex items-center gap-2 md:gap-3 group magnetic-btn no-underline">
+                <div class="w-8 h-8 md:w-10 md:h-10 bg-black dark:bg-white text-white dark:text-black rounded-lg md:rounded-xl flex items-center justify-center font-mono font-bold text-sm md:text-lg shadow-md border border-gray-400 dark:border-transparent">
                     &gt;_
                 </div>
-                <div class="font-bold tracking-tight text-xl flex items-center">
+                <div class="font-bold tracking-tight text-lg md:text-xl flex items-center">
                     <span class="text-black dark:text-white">LIK</span>
                     <span id="typewriter-text" class="text-black dark:text-white">Apps</span><span class="type-cursor"></span>
                 </div>
             </a>
 
-            <!-- CENTER: BUSINESS BUTTON -->
-            <div class="relative group">
-                <a href="#contact" id="business-btn" class="hidden md:flex items-center gap-2 px-6 py-3 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 transition-all cursor-pointer border border-blue-300 dark:border-blue-500/20">
+            <!-- CENTER: BUSINESS BUTTON (Visible on desktop) -->
+            <div class="relative group hidden md:block">
+                <a href="#contact" id="business-btn" class="flex items-center gap-2 px-6 py-3 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 transition-all cursor-pointer border border-blue-300 dark:border-blue-500/20">
                     <span data-key="nav.business">Business</span>
                     <i class="fas fa-briefcase"></i>
                 </a>
 
-                <!-- 30s POPUP (Perfectly Aligned Below) -->
-                <div id="business-popup" class="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-72 bg-blue-600 text-white p-4 rounded-xl shadow-2xl z-50 opacity-0 pointer-events-none transition-all duration-500 transform translate-y-4 border-2 border-white/20">
-                    <!-- Triangle Arrow (Centered) -->
+                <!-- 3s POPUP -->
+                <div id="business-popup" class="absolute top-full mt-2 left-1/2 -ml-36 w-72 bg-blue-600 text-white p-4 rounded-xl shadow-2xl z-50 opacity-0 pointer-events-none transition-all duration-500 transform translate-y-4 border-2 border-white/20">
                     <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-blue-600 rotate-45 border-t border-l border-white/20"></div>
-                    
-                    <!-- Close Icon -->
                     <button id="close-popup" class="absolute top-2 right-2 text-white/70 hover:text-white transition-colors">
                         <i class="fas fa-times"></i>
                     </button>
-
                     <div class="flex items-start gap-3 pr-4 relative z-10">
                         <span class="text-3xl">🧛‍♂️</span>
                         <div>
@@ -328,34 +373,40 @@
                 </div>
             </div>
 
-            <!-- Right Controls -->
-            <div class="flex items-center gap-3 w-[200px] justify-end">
+            <!-- Right Controls (Compact on Mobile) -->
+            <div class="flex items-center gap-2 w-auto justify-end relative">
                 
-                <!-- Theme Toggle (BIGGER & VISIBLE) -->
-                <button id="theme-btn" class="w-11 h-11 rounded-full bg-gray-200 dark:bg-white/10 flex items-center justify-center text-black dark:text-white hover:bg-yellow-400/20 hover:text-yellow-600 transition-all magnetic-btn shadow-md border border-gray-300 dark:border-white/20 text-xl">
+                <!-- Theme Toggle -->
+                <button id="theme-btn" class="w-8 h-8 md:w-11 md:h-11 rounded-full bg-gray-200 dark:bg-white/10 flex items-center justify-center text-black dark:text-white hover:bg-yellow-400/20 hover:text-yellow-600 transition-all magnetic-btn shadow-md border border-gray-300 dark:border-white/20 text-sm md:text-xl">
                     <i class="fas fa-sun block dark:hidden"></i>
                     <i class="fas fa-moon hidden dark:block"></i>
                 </button>
 
-                <!-- Language Switch (BIGGER & VISIBLE) -->
-                <div id="lang-switch" class="lang-switch magnetic-btn shadow-inner mx-1" title="Switch Language">
-                    <span>SQ</span>
-                    <span>EN</span>
+                <!-- Language Switch -->
+                <div class="relative group">
+                    <div id="lang-switch" class="lang-switch magnetic-btn shadow-inner mx-1" title="Switch Language">
+                        <span>SQ</span>
+                        <span>EN</span>
+                    </div>
+
+                    <!-- REVISED POPUP: Below Button -->
+                    <div id="glass-popup" class="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-[110px] bg-white/90 dark:bg-neutral-800/90 backdrop-blur-md border border-gray-200 dark:border-neutral-700 rounded-lg p-2 z-50 shadow-xl flex flex-col items-center justify-center">
+                        <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-white/90 dark:bg-neutral-800/90 rotate-45 border-t border-l border-gray-200 dark:border-neutral-700"></div>
+                        <span class="text-[10px] font-bold text-black dark:text-white whitespace-nowrap">Apo don shqip?</span>
+                        <span id="glass-timer" class="text-[9px] font-mono text-red-500 font-bold mt-0.5">5s</span>
+                    </div>
                 </div>
                 
-                <!-- Ghost Button (BIGGER & SCARY) -->
-                <button id="funny-mode-btn" class="w-11 h-11 rounded-full bg-gray-200 dark:bg-white/10 flex items-center justify-center text-black dark:text-white hover:bg-red-600 hover:text-white transition-all magnetic-btn shadow-md border border-gray-300 dark:border-white/20 text-xl group relative overflow-hidden" title="???">
-                    <i class="fas fa-ghost group-hover:animate-bounce"></i>
-                </button>
-            </div>
-
-            <!-- Language Popup Hint (First Load) -->
-            <div id="lang-popup" class="absolute top-[85px] right-[80px] bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 shadow-xl rounded-xl p-3 flex items-center gap-3 animate-bounce z-50 transition-opacity duration-500">
-                <div class="absolute -top-1 right-8 w-3 h-3 bg-white dark:bg-neutral-800 border-t border-l border-gray-200 dark:border-neutral-700 rotate-45"></div>
-                <span class="text-xl">🇦🇱</span>
-                <div class="flex flex-col">
-                    <span class="text-xs font-bold whitespace-nowrap text-black dark:text-white">A don shqip?</span>
-                    <span class="text-[10px] text-gray-400 font-mono" id="popup-timer">Closing in 5s</span>
+                <!-- Ghost Button -->
+                <div class="relative">
+                    <button id="funny-mode-btn" class="w-8 h-8 md:w-11 md:h-11 rounded-full bg-gray-200 dark:bg-white/10 flex items-center justify-center text-black dark:text-white hover:bg-red-600 hover:text-white transition-all magnetic-btn shadow-md border border-gray-300 dark:border-white/20 text-sm md:text-xl group relative overflow-hidden" title="???">
+                        <i class="fas fa-ghost group-hover:animate-bounce"></i>
+                    </button>
+                    <!-- GHOST POPUP TRIGGER -->
+                    <div id="ghost-trigger-popup" class="absolute top-full mt-2 right-0 w-max bg-red-600 text-white px-3 py-1 rounded-lg text-xs font-bold shadow-lg opacity-0 pointer-events-none transition-all duration-300 transform -translate-y-2 z-[100]">
+                        Click Me! 👻
+                        <div class="absolute -top-1 right-3 w-3 h-3 bg-red-600 rotate-45"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -365,57 +416,57 @@
     <div id="snap-container">
 
         <!-- SECTION 1: HERO -->
-        <section id="hero" class="snap-section px-6 overflow-hidden">
+        <section id="hero" class="snap-section px-4 md:px-6 overflow-hidden">
             <!-- Background Aurora -->
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[120px] animate-float pointer-events-none"></div>
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] md:w-[800px] h-[300px] md:h-[500px] bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[80px] md:blur-[120px] animate-float pointer-events-none"></div>
 
             <!-- THE BUG -->
             <div id="the-bug" class="hidden md:block top-1/4 left-1/4" title="Catch me if you can!"><i class="fas fa-bug"></i></div>
 
             <div class="text-center max-w-5xl mx-auto relative z-10 animate-[fadeInUp_0.8s_ease-out_forwards]">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/5 dark:bg-blue-500/10 text-blue-600 dark:text-blue-500 text-xs font-bold uppercase tracking-widest mb-8 shadow-sm">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/5 dark:bg-blue-500/10 text-blue-600 dark:text-blue-500 text-xs font-bold uppercase tracking-widest mb-6 md:mb-8 shadow-sm">
                     <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
                     <span data-key="hero.pill">Ecosystem Active</span>
                 </div>
 
-                <h1 class="text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter leading-none mb-8 text-neutral-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-white dark:to-gray-500">
+                <h1 class="text-4xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter leading-tight mb-6 md:mb-8 text-neutral-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-b dark:from-white dark:to-gray-500">
                     <span data-key="hero.title_soft">Software.</span><br>
                     <span data-key="hero.title_unchained">Unchained.</span>
                 </h1>
 
-                <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed font-medium" data-key="hero.desc">
+                <p class="text-base md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8 md:mb-12 leading-relaxed font-medium px-2" data-key="hero.desc">
                     A complete suite of professional tools. <span class="text-blue-600 dark:text-blue-500 font-bold">LIKApos</span> is the ultimate solution: 100% Free, Offline-Capable, and Private. No Cloud subscriptions. No Rent seeking. Just pure code.
                 </p>
 
-                <div class="flex flex-col md:flex-row justify-center gap-4">
-                    <a href="#suite" class="magnetic-btn px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold text-lg hover:scale-105 transition-transform flex items-center justify-center gap-2 shadow-xl shadow-blue-500/10">
+                <div class="flex flex-col md:flex-row justify-center gap-4 px-4">
+                    <a href="#suite" class="magnetic-btn px-6 py-3 md:px-8 md:py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold text-base md:text-lg hover:scale-105 transition-transform flex items-center justify-center gap-2 shadow-xl shadow-blue-500/10">
                         <span data-key="hero.cta">Enter The Suite</span> <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
             </div>
 
             <!-- Scroll Indicator -->
-            <div class="absolute bottom-10 animate-bounce opacity-30 text-black dark:text-white">
+            <div class="absolute bottom-10 animate-bounce opacity-30 text-black dark:text-white hidden md:block">
                 <i class="fas fa-chevron-down text-2xl"></i>
             </div>
         </section>
 
         <!-- SECTION 2: THE SUITE (Bento Grid) -->
-        <section id="suite" class="snap-section px-6 bg-white dark:bg-brand-dark transition-colors">
-            <div class="max-w-7xl mx-auto w-full py-20">
-                <div class="mb-8 flex justify-between items-end">
+        <section id="suite" class="snap-section px-4 md:px-6 bg-white dark:bg-brand-dark transition-colors">
+            <div class="max-w-7xl mx-auto w-full py-10 md:py-20">
+                <div class="mb-6 md:mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-2">
                     <div>
-                        <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-2 text-neutral-900 dark:text-white" data-key="suite.title">The Suite</h2>
-                        <p class="text-gray-500 font-medium" data-key="suite.subtitle">Designed for absolute performance.</p>
+                        <h2 class="text-3xl md:text-6xl font-bold tracking-tight mb-2 text-neutral-900 dark:text-white" data-key="suite.title">The Suite</h2>
+                        <p class="text-gray-500 font-medium text-sm md:text-base" data-key="suite.subtitle">Designed for absolute performance.</p>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 grid-rows-1 md:grid-rows-2 gap-6 md:h-[650px]">
+                <div class="grid grid-cols-1 md:grid-cols-3 grid-rows-auto md:grid-rows-2 gap-4 md:gap-6 md:h-[650px]">
                     
                     <!-- LIKApos (Featured - Large) -->
-                    <div id="pos-card" class="spotlight-card md:col-span-2 md:row-span-2 rounded-3xl p-8 md:p-12 flex flex-col justify-between group cursor-pointer transition-all">
+                    <div id="pos-card" class="spotlight-card md:col-span-2 md:row-span-2 rounded-3xl p-6 md:p-12 flex flex-col justify-between group cursor-pointer transition-all">
                         <div class="relative z-10">
-                            <div class="flex gap-2 mb-6 items-center">
+                            <div class="flex gap-2 mb-4 md:mb-6 items-center flex-wrap">
                                 <span class="px-2 py-1 bg-green-100 dark:bg-green-500/10 text-green-700 dark:text-green-500 text-xs font-bold rounded uppercase border border-green-200 dark:border-green-500/20">Live</span>
                                 
                                 <!-- THE NEW FUNNY PRICE TAG (Swinging) -->
@@ -428,23 +479,23 @@
 
                                 <span class="px-2 py-1 bg-purple-100 dark:bg-purple-500/10 text-purple-700 dark:text-purple-500 text-xs font-bold rounded uppercase border border-purple-200 dark:border-purple-500/20 animate-pulse ml-2">v3.1</span>
                             </div>
-                            <h3 class="text-4xl md:text-6xl font-bold mb-4 text-neutral-900 dark:text-white">LIKApos</h3>
+                            <h3 class="text-3xl md:text-6xl font-bold mb-4 text-neutral-900 dark:text-white">LIKApos</h3>
                             
-                            <p class="text-lg text-gray-600 dark:text-gray-400 max-w-lg leading-relaxed mb-4" data-key="pos.desc">
+                            <p class="text-sm md:text-lg text-gray-600 dark:text-gray-400 max-w-lg leading-relaxed mb-4" data-key="pos.desc">
                                 The industry-standard offline-first POS system. Engineered for Windows & Web to run seamlessly on mobile, tablet, and desktop. Includes full inventory tracking.
                             </p>
                         </div>
                         
                         <!-- Buttons & Visual -->
                         <div class="mt-8 flex flex-col md:flex-row items-start md:items-end justify-between relative z-10 gap-6">
-                            <div class="flex flex-col gap-4">
+                            <div class="flex flex-col gap-4 w-full md:w-auto">
                                 <!-- Preview Button -->
-                                <a href="https://pos-site.likaapps.com/" target="_blank" class="w-fit px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105 active:scale-95 flex items-center gap-2">
+                                <a href="https://pos-site.likaapps.com/" target="_blank" class="w-full md:w-fit px-6 py-3 md:px-8 md:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
                                     <span data-key="btn.preview">Preview</span> <i class="fas fa-eye text-xs"></i>
                                 </a>
 
                                 <!-- Platform Icons -->
-                                <div class="flex items-center gap-4 text-gray-400 dark:text-gray-500">
+                                <div class="flex items-center justify-center md:justify-start gap-4 text-gray-400 dark:text-gray-500">
                                     <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Windows"><i class="fab fa-windows text-xl"></i></a>
                                     <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Web"><i class="fas fa-globe text-xl"></i></a>
                                     <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Mobile"><i class="fas fa-mobile-alt text-xl"></i></a>
@@ -454,7 +505,7 @@
                             </div>
 
                             <!-- Interactive Exploding Icon -->
-                            <div class="relative group/icon">
+                            <div class="relative group/icon self-center md:self-end">
                                 <img 
                                     id="pos-icon"
                                     src="https://ik.imagekit.io/bufi/icon%20LIKApos/icon.png?updatedAt=1763904694719" 
@@ -514,30 +565,30 @@
         </section>
 
         <!-- SECTION 3: CONTACT (The Void) -->
-        <section id="contact" class="snap-section px-6 relative bg-[#f3f4f6] dark:bg-black transition-colors">
+        <section id="contact" class="snap-section px-4 md:px-6 relative bg-[#f3f4f6] dark:bg-black transition-colors">
             <!-- Footer Content -->
             <div class="max-w-4xl mx-auto text-center w-full">
-                <h2 class="text-5xl md:text-8xl font-bold tracking-tighter mb-16 hover:text-blue-600 dark:hover:text-blue-500 transition-colors duration-500 cursor-default text-neutral-900 dark:text-white" data-key="footer.title">
+                <h2 class="text-4xl md:text-8xl font-bold tracking-tighter mb-10 md:mb-16 hover:text-blue-600 dark:hover:text-blue-500 transition-colors duration-500 cursor-default text-neutral-900 dark:text-white" data-key="footer.title">
                     Let's Build.
                 </h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
-                    <!-- Email Card -->
-                    <a href="mailto:likapps@proton.me" class="group spotlight-card rounded-2xl p-10 flex flex-col items-center justify-center transition-transform hover:-translate-y-2">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12 md:mb-12">
+                    <!-- Email Card - CLICK TO COPY -->
+                    <div onclick="copyEmail()" class="group spotlight-card rounded-2xl p-8 md:p-10 flex flex-col items-center justify-center transition-transform hover:-translate-y-2 cursor-pointer active:scale-95">
                         <i class="fas fa-envelope text-4xl mb-4 text-gray-400 group-hover:text-blue-500 transition-colors"></i>
                         <span class="text-xl font-bold text-neutral-900 dark:text-white">Email</span>
-                        <span class="text-sm text-gray-500 mt-2 font-mono">likapps@proton.me</span>
+                        <span id="email-text" class="text-sm text-gray-500 mt-2 font-mono">likapps@proton.me</span>
                         
                         <div class="h-8 overflow-hidden mt-6 w-full relative">
                             <div class="absolute inset-0 flex flex-col items-center transition-transform duration-300 group-hover:-translate-y-8">
                                 <p class="text-sm text-gray-400 font-medium" data-key="email.normal">Business Inquiries Only</p>
-                                <p class="text-sm text-blue-500 font-bold mt-4" data-key="email.funny">I have lawyers ⚖️</p>
+                                <p id="email-feedback" class="text-sm text-blue-500 font-bold mt-4" data-key="email.funny">Click to Copy 📋</p>
                             </div>
                         </div>
-                    </a>
+                    </div>
 
-                    <!-- Instagram Card -->
-                    <a href="https://instagram.com/lika.apps" target="_blank" class="group spotlight-card rounded-2xl p-10 flex flex-col items-center justify-center transition-transform hover:-translate-y-2">
+                    <!-- Instagram Card - DIRECT LINK -->
+                    <a href="https://instagram.com/lika.apps" target="_blank" class="group spotlight-card rounded-2xl p-8 md:p-10 flex flex-col items-center justify-center transition-transform hover:-translate-y-2">
                         <i class="fab fa-instagram text-4xl mb-4 text-gray-400 group-hover:text-pink-500 transition-colors"></i>
                         <span class="text-xl font-bold text-neutral-900 dark:text-white">Instagram</span>
                         <span class="text-sm text-gray-500 mt-2 font-mono">@lika.apps</span>
@@ -551,7 +602,15 @@
                     </a>
                 </div>
 
-                <div class="flex justify-between items-center text-xs text-gray-500 font-mono border-t border-gray-300 dark:border-gray-800 pt-8">
+                <!-- TERMINAL TYPING INTERACTION -->
+                <div class="w-full max-w-2xl mx-auto text-left mb-12 px-2">
+                    <div class="font-mono text-sm md:text-base text-gray-500 dark:text-gray-400 min-h-[60px] leading-relaxed">
+                        <span class="text-green-600 dark:text-green-500 mr-2 font-bold select-none">➜</span>
+                        <span id="terminal-text" class="text-gray-800 dark:text-gray-300"></span><span class="type-cursor text-green-600 dark:text-green-500 font-bold">|</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-mono border-t border-gray-300 dark:border-gray-800 pt-8 gap-4">
                     <span>© <span id="year"></span> LIKApps</span>
                     <span class="flex items-center gap-2">
                         <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -584,7 +643,8 @@
                 "scan.desc": "Next-generation inventory scanning utility. Utilizes camera APIs for ultra-fast barcode recognition, QR parsing, and instant database lookups.",
                 "footer.title": "Let's Build.",
                 "email.normal": "Business Inquiries Only",
-                "email.funny": "I have lawyers ⚖️",
+                "email.funny": "Click to Copy 📋",
+                "email.copied": "Copied! ✅",
                 "insta.normal": "Follow the journey",
                 "insta.funny": "Influencer Mode 🤳",
                 "popup.business": "Don't panic! I don't bite... hard. (Business Only)",
@@ -607,7 +667,8 @@
                 "scan.desc": "Mjeti i gjeneratës tjetër për skanimin e inventarit. Përdor API-të e kamerës për njohjen ultra të shpejtë të barkodit, analizimin e QR dhe kërkimet e menjëhershme.",
                 "footer.title": "Le të Ndërtojmë.",
                 "email.normal": "Vetëm Për Biznes",
-                "email.funny": "Kam avokatë ⚖️",
+                "email.funny": "Kliko për Kopjim 📋",
+                "email.copied": "U Kopjua! ✅",
                 "insta.normal": "Na ndiqni rrugëtimin",
                 "insta.funny": "Tu bo si Influencer 🤳",
                 "popup.business": "Mos u tut! S'të ha... krejt. (Vetëm Biznes)",
@@ -622,7 +683,51 @@
 
         let currentLang = 'en';
 
-        // --- 2. HELPER: SCRAMBLE TEXT (MATRIX EFFECT) ---
+        // --- 2. COPY EMAIL LOGIC ---
+        function copyEmail() {
+            const email = "likapps@proton.me";
+            
+            // Fallback for iframe restrictions: use textarea and execCommand
+            const textArea = document.createElement("textarea");
+            textArea.value = email;
+            
+            // Ensure it's not visible but part of the DOM
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "0";
+            document.body.appendChild(textArea);
+            
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                     const feedbackEl = document.getElementById('email-feedback');
+                    
+                    // Change text to feedback
+                    feedbackEl.innerText = i18n[currentLang]['email.copied'];
+                    feedbackEl.classList.add('text-green-500');
+                    feedbackEl.classList.remove('text-blue-500');
+
+                    // Reset after 2 seconds
+                    setTimeout(() => {
+                        feedbackEl.innerText = i18n[currentLang]['email.funny'];
+                        feedbackEl.classList.remove('text-green-500');
+                        feedbackEl.classList.add('text-blue-500');
+                    }, 2000);
+                } else {
+                    throw new Error('Copy command failed');
+                }
+            } catch (err) {
+                console.error('Fallback copy failed', err);
+                alert("Failed to copy email. Please copy manually: likapps@proton.me");
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // --- 3. HELPER: SCRAMBLE TEXT (MATRIX EFFECT) ---
         function animateTextChange(element, newHtml) {
             // Set HTML immediately so layout is correct and we can access text nodes
             element.innerHTML = newHtml;
@@ -674,7 +779,7 @@
             });
         }
 
-        // --- 3. SPOTLIGHT EFFECT LOGIC ---
+        // --- 4. SPOTLIGHT EFFECT LOGIC ---
         function initSpotlight() {
             const cards = document.querySelectorAll(".spotlight-card");
             document.onmousemove = e => {
@@ -688,14 +793,13 @@
             };
         }
 
-        // --- 4. KOSOVO TIME & THEME INITIALIZATION ---
+        // --- 5. KOSOVO TIME & THEME INITIALIZATION ---
         let manualThemeOverride = false;
 
         function updateKosovoTime() {
             const date = new Date().toLocaleString("en-US", {timeZone: "Europe/Belgrade"});
             const now = new Date(date);
             const hours = now.getHours();
-            const mins = now.getMinutes().toString().padStart(2, '0');
             
             // Theme Logic
             if (!manualThemeOverride) {
@@ -715,8 +819,11 @@
             html.classList.toggle('dark');
         }
 
-        // --- 5. MAGNETIC BUTTONS ---
+        // --- 6. MAGNETIC BUTTONS ---
         function initMagneticButtons() {
+            // Only init magnetic effect on desktop to save mobile performance
+            if (window.innerWidth < 768) return;
+
             const btns = document.querySelectorAll('.magnetic-btn');
             btns.forEach(btn => {
                 btn.addEventListener('mousemove', (e) => {
@@ -731,7 +838,7 @@
             });
         }
         
-        // --- 6. THE BUG LOGIC ---
+        // --- 7. THE BUG LOGIC ---
         function initBug() {
             const bug = document.getElementById('the-bug');
             if(!bug) return;
@@ -760,7 +867,7 @@
             });
         }
 
-        // --- 7. SOUND & EXPLOSION LOGIC ---
+        // --- 8. SOUND & EXPLOSION LOGIC ---
         function playExplosionSound() {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             if (!AudioContext) return;
@@ -786,21 +893,7 @@
             noise.start();
         }
 
-        function playScarySound() {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            if (!AudioContext) return;
-            const ctx = new AudioContext();
-            const osc = ctx.createOscillator();
-            osc.type = 'sawtooth';
-            osc.frequency.setValueAtTime(100, ctx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.2);
-            const gain = ctx.createGain();
-            gain.gain.setValueAtTime(1, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start();
-        }
+        // REMOVED SCARY SOUND AS REQUESTED
 
         function triggerExplosion(element) {
             playExplosionSound();
@@ -819,38 +912,33 @@
             }, 3000);
         }
 
-        // --- 8. POPUP & LOGIC ---
-        function initLanguagePopup() {
-            const popup = document.getElementById('lang-popup');
-            const timerEl = document.getElementById('popup-timer');
-            let timeLeft = 5;
-            const interval = setInterval(() => {
-                timeLeft--;
-                timerEl.innerText = `Closing in ${timeLeft}s`;
-                if(timeLeft <= 0) {
-                    clearInterval(interval);
-                    popup.classList.add('opacity-0');
-                    setTimeout(() => popup.remove(), 500);
-                }
-            }, 1000);
-        }
-
+        // --- 9. POPUP & LOGIC (FIXED: 3s delay) ---
         function initBusinessPopup() {
+            // Only show business popup on desktop where business button is visible
+            if(window.innerWidth < 768) return;
+
             const popup = document.getElementById('business-popup');
             const closeBtn = document.getElementById('close-popup');
+            
             const closePopup = () => {
+                if(!popup) return;
                 popup.classList.remove('animate-bounce');
                 popup.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
             };
-            closeBtn.addEventListener('click', closePopup);
+            
+            if(closeBtn) closeBtn.addEventListener('click', closePopup);
+            
+            // Wait 3 seconds instead of 30
             setTimeout(() => {
                 if(popup) {
                      popup.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
                      popup.classList.add('animate-bounce');
+                     // Stop bouncing after 5s
                      setTimeout(() => popup.classList.remove('animate-bounce'), 5000);
+                     // Auto close after 20s
                      setTimeout(closePopup, 20000); 
                 }
-            }, 30000); 
+            }, 3000); 
         }
 
         function initFunnyPriceTag() {
@@ -873,7 +961,7 @@
 
         function triggerScaryMode() {
             const overlay = document.getElementById('scary-overlay');
-            playScarySound();
+            // NO SOUND HERE
             document.body.classList.add('animate-shake-hard');
             document.documentElement.classList.add('scary-active');
             overlay.style.display = 'flex';
@@ -884,7 +972,31 @@
             }, 400);
         }
 
-        // --- 9. CUSTOM LOGO TYPEWRITER LOGIC ---
+        // --- GLASS BREAK POPUP LOGIC ---
+        function initGlassPopup() {
+            let count = 5;
+            const popup = document.getElementById('glass-popup');
+            const timer = document.getElementById('glass-timer');
+            
+            // Wait 1s before start
+            setTimeout(() => {
+                const int = setInterval(() => {
+                    count--;
+                    if (timer) timer.innerText = count + "s";
+                    
+                    if (count <= 0) {
+                        clearInterval(int);
+                        if(popup) {
+                            // Fade out logic
+                            popup.style.opacity = '0';
+                            setTimeout(() => popup.remove(), 500);
+                        }
+                    }
+                }, 1000);
+            }, 1000);
+        }
+
+        // --- 10. CUSTOM LOGO TYPEWRITER LOGIC ---
         function initTypewriter() {
             const el = document.getElementById('typewriter-text');
             if(!el) return;
@@ -923,20 +1035,17 @@
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
-        // Type/Delete with random speed variance for "human" feel
         function typeString(element, text, isDeleting) {
             return new Promise(async resolve => {
                 const chars = text.split('');
                 if(isDeleting) {
                     for (let i = 0; i < chars.length; i++) {
                         element.textContent = element.textContent.slice(0, -1);
-                        // Randomize delete speed (50-100ms)
                         await wait(50 + Math.random() * 50);
                     }
                 } else {
                     for (let i = 0; i < chars.length; i++) {
                         element.textContent += chars[i];
-                        // Randomize typing speed (80-150ms)
                         await wait(80 + Math.random() * 70);
                     }
                 }
@@ -944,15 +1053,75 @@
             });
         }
 
-        // --- 10. INITIALIZATION ---
+        // --- 11. TERMINAL TYPING INTERACTION (NEW) ---
+        function initTerminal() {
+            const el = document.getElementById('terminal-text');
+            const popupTrigger = document.getElementById('ghost-trigger-popup');
+            const textToType = "Do you want to do business? If yes, first you have to click the ghost button. If you are not scared, then we can do business.";
+            let hasStarted = false;
+            
+            // Words that trigger the popup (must match textToType)
+            const triggerPhrase = "click the ghost button";
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasStarted) {
+                        hasStarted = true;
+                        startTyping();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(el);
+
+            async function startTyping() {
+                const chars = textToType.split('');
+                let currentText = "";
+                
+                for (let i = 0; i < chars.length; i++) {
+                    currentText += chars[i];
+                    el.textContent = currentText;
+                    
+                    // Check if we just typed the trigger phrase
+                    if (currentText.endsWith(triggerPhrase)) {
+                         showGhostPopup();
+                         await wait(1500); // Pause for emphasis
+                    }
+
+                    // Humanize typing speed
+                    // Pauses on punctuation
+                    if (chars[i] === '.' || chars[i] === '?' || chars[i] === ',') {
+                        await wait(500 + Math.random() * 300);
+                    } else {
+                        await wait(30 + Math.random() * 50);
+                    }
+                }
+            }
+
+            function showGhostPopup() {
+                if(popupTrigger) {
+                    popupTrigger.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-2');
+                    popupTrigger.classList.add('animate-bounce');
+                    
+                    // Hide after a while
+                    setTimeout(() => {
+                        popupTrigger.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
+                        popupTrigger.classList.remove('animate-bounce');
+                    }, 5000);
+                }
+            }
+        }
+
+        // --- 12. INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             initSpotlight();
             initMagneticButtons();
             initBug();
-            initLanguagePopup();
             initBusinessPopup();
             initFunnyPriceTag();
             initTypewriter();
+            initTerminal(); 
+            initGlassPopup(); // Start glass popup logic
             
             updateKosovoTime(); 
             setInterval(updateKosovoTime, 1000); 
@@ -982,6 +1151,12 @@
 
                 const bizPopupText = document.getElementById('business-popup-text');
                 if(bizPopupText) animateTextChange(bizPopupText, i18n[currentLang]['popup.business']);
+                
+                // Update email copy text if reset
+                const feedbackEl = document.getElementById('email-feedback');
+                if (!feedbackEl.classList.contains('text-green-500')) {
+                    feedbackEl.innerText = i18n[currentLang]['email.funny'];
+                }
             });
 
             const funnyBtn = document.getElementById('funny-mode-btn');

@@ -351,26 +351,13 @@
                 </div>
             </a>
 
-            <!-- CENTER: BUSINESS BUTTON (Visible on desktop) -->
-            <div class="relative group hidden md:block">
-                <a href="#contact" id="business-btn" class="flex items-center gap-2 px-6 py-3 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 transition-all cursor-pointer border border-blue-300 dark:border-blue-500/20">
+            <!-- CENTER: BUSINESS BUTTON (Static & Flashing, NO POPUP) -->
+            <div class="relative hidden md:block">
+                <!-- Removed magnetic-btn class, added animate-pulse-slow -->
+                <a href="#contact" id="business-btn" class="flex items-center gap-2 px-6 py-3 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 transition-all cursor-pointer border border-blue-300 dark:border-blue-500/20 animate-pulse">
                     <span data-key="nav.business">Business</span>
                     <i class="fas fa-briefcase"></i>
                 </a>
-
-                <!-- 3s POPUP -->
-                <div id="business-popup" class="absolute top-full mt-2 left-1/2 -ml-36 w-72 bg-blue-600 text-white p-4 rounded-xl shadow-2xl z-50 opacity-0 pointer-events-none transition-all duration-500 transform translate-y-4 border-2 border-white/20">
-                    <div class="absolute -top-2.5 left-1/2 -translate-x-1/2 w-5 h-5 bg-blue-600 rotate-45 border-t border-l border-white/20"></div>
-                    <button id="close-popup" class="absolute top-2 right-2 text-white/70 hover:text-white transition-colors">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <div class="flex items-start gap-3 pr-4 relative z-10">
-                        <span class="text-3xl">🧛‍♂️</span>
-                        <div>
-                            <p class="text-sm font-bold leading-tight" id="business-popup-text">Don't panic! I don't bite... hard. (Business Only)</p>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <!-- Right Controls (Compact on Mobile) -->
@@ -567,12 +554,13 @@
         <!-- SECTION 3: CONTACT (The Void) -->
         <section id="contact" class="snap-section px-4 md:px-6 relative bg-[#f3f4f6] dark:bg-black transition-colors">
             <!-- Footer Content -->
-            <div class="max-w-4xl mx-auto text-center w-full">
+            <div class="max-w-5xl mx-auto text-center w-full">
                 <h2 class="text-4xl md:text-8xl font-bold tracking-tighter mb-10 md:mb-16 hover:text-blue-600 dark:hover:text-blue-500 transition-colors duration-500 cursor-default text-neutral-900 dark:text-white" data-key="footer.title">
                     Let's Build.
                 </h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-12 md:mb-12">
+                <!-- Updated Grid for 3 Items -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-12">
                     <!-- Email Card - CLICK TO COPY -->
                     <div onclick="copyEmail()" class="group spotlight-card rounded-2xl p-8 md:p-10 flex flex-col items-center justify-center transition-transform hover:-translate-y-2 cursor-pointer active:scale-95">
                         <i class="fas fa-envelope text-4xl mb-4 text-gray-400 group-hover:text-blue-500 transition-colors"></i>
@@ -597,6 +585,20 @@
                             <div class="absolute inset-0 flex flex-col items-center transition-transform duration-300 group-hover:-translate-y-8">
                                 <p class="text-sm text-gray-400 font-medium" data-key="insta.normal">Follow the journey</p>
                                 <p class="text-sm text-pink-500 font-bold mt-4" data-key="insta.funny">Influencer Mode 🤳</p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- TikTok Card - DIRECT LINK (NEW) -->
+                    <a href="https://tiktok.com/@lika.apps" target="_blank" class="group spotlight-card rounded-2xl p-8 md:p-10 flex flex-col items-center justify-center transition-transform hover:-translate-y-2">
+                        <i class="fab fa-tiktok text-4xl mb-4 text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors"></i>
+                        <span class="text-xl font-bold text-neutral-900 dark:text-white">TikTok</span>
+                        <span class="text-sm text-gray-500 mt-2 font-mono">@lika.apps</span>
+                        
+                        <div class="h-8 overflow-hidden mt-6 w-full relative">
+                            <div class="absolute inset-0 flex flex-col items-center transition-transform duration-300 group-hover:-translate-y-8">
+                                <p class="text-sm text-gray-400 font-medium" data-key="tiktok.normal">Watch the magic</p>
+                                <p class="text-sm text-black dark:text-white font-bold mt-4 whitespace-nowrap" data-key="tiktok.funny">We don't dance, we create.</p>
                             </div>
                         </div>
                     </a>
@@ -647,7 +649,8 @@
                 "email.copied": "Copied! ✅",
                 "insta.normal": "Follow the journey",
                 "insta.funny": "Influencer Mode 🤳",
-                "popup.business": "Don't panic! I don't bite... hard. (Business Only)",
+                "tiktok.normal": "Watch the magic",
+                "tiktok.funny": "We don't dance, we create.",
                 "price.default": "$0.00"
             },
             sq: {
@@ -671,7 +674,8 @@
                 "email.copied": "U Kopjua! ✅",
                 "insta.normal": "Na ndiqni rrugëtimin",
                 "insta.funny": "Tu bo si Influencer 🤳",
-                "popup.business": "Mos u tut! S'të ha... krejt. (Vetëm Biznes)",
+                "tiktok.normal": "Shiko magjinë",
+                "tiktok.funny": "S'kërcejmë, ne krijojmë.",
                 "price.default": "$0.00"
             }
         };
@@ -893,7 +897,26 @@
             noise.start();
         }
 
-        // REMOVED SCARY SOUND AS REQUESTED
+        // --- GLASS CRACK SOUND ---
+        function playGlassCrackSound() {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContext) return;
+            const ctx = new AudioContext();
+            const bufferSize = ctx.sampleRate * 0.1; // Short crack
+            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = (Math.random() * 2 - 1) * Math.exp(-5 * i / bufferSize); // Decay noise
+            }
+            
+            const noise = ctx.createBufferSource();
+            noise.buffer = buffer;
+            const gain = ctx.createGain();
+            gain.gain.setValueAtTime(0.5, ctx.currentTime);
+            noise.connect(gain);
+            gain.connect(ctx.destination);
+            noise.start();
+        }
 
         function triggerExplosion(element) {
             playExplosionSound();
@@ -910,35 +933,6 @@
                 card.classList.remove('animate-shake');
                 container.classList.add('opacity-0');
             }, 3000);
-        }
-
-        // --- 9. POPUP & LOGIC (FIXED: 3s delay) ---
-        function initBusinessPopup() {
-            // Only show business popup on desktop where business button is visible
-            if(window.innerWidth < 768) return;
-
-            const popup = document.getElementById('business-popup');
-            const closeBtn = document.getElementById('close-popup');
-            
-            const closePopup = () => {
-                if(!popup) return;
-                popup.classList.remove('animate-bounce');
-                popup.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-            };
-            
-            if(closeBtn) closeBtn.addEventListener('click', closePopup);
-            
-            // Wait 3 seconds instead of 30
-            setTimeout(() => {
-                if(popup) {
-                     popup.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-                     popup.classList.add('animate-bounce');
-                     // Stop bouncing after 5s
-                     setTimeout(() => popup.classList.remove('animate-bounce'), 5000);
-                     // Auto close after 20s
-                     setTimeout(closePopup, 20000); 
-                }
-            }, 3000); 
         }
 
         function initFunnyPriceTag() {
@@ -986,10 +980,11 @@
                     
                     if (count <= 0) {
                         clearInterval(int);
+                        // Trigger Break
                         if(popup) {
-                            // Fade out logic
-                            popup.style.opacity = '0';
-                            setTimeout(() => popup.remove(), 500);
+                            playGlassCrackSound();
+                            popup.classList.add('glass-broken');
+                            setTimeout(() => popup.remove(), 1000);
                         }
                     }
                 }, 1000);
@@ -1117,7 +1112,6 @@
             initSpotlight();
             initMagneticButtons();
             initBug();
-            initBusinessPopup();
             initFunnyPriceTag();
             initTypewriter();
             initTerminal(); 
@@ -1148,15 +1142,6 @@
                     // TRIGGER THE "WRRRRRR" MATRIX EFFECT
                     if(newText) animateTextChange(el, newText);
                 });
-
-                const bizPopupText = document.getElementById('business-popup-text');
-                if(bizPopupText) animateTextChange(bizPopupText, i18n[currentLang]['popup.business']);
-                
-                // Update email copy text if reset
-                const feedbackEl = document.getElementById('email-feedback');
-                if (!feedbackEl.classList.contains('text-green-500')) {
-                    feedbackEl.innerText = i18n[currentLang]['email.funny'];
-                }
             });
 
             const funnyBtn = document.getElementById('funny-mode-btn');

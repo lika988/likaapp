@@ -3,16 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LIKApps | Future Software</title>
     
+    <!-- SEO & Social Sharing -->
+    <title>LIKApps | Future Software Ecosystem</title>
+    <meta name="description" content="A complete suite of professional tools: LIKApos, LIKAshare, and LIKAdev. 100% Free, Offline-Capable, and Private. Unchained Software.">
+    
+    <!-- FAVICON & HOME SCREEN ICONS -->
+    <link rel="icon" href="https://ik.imagekit.io/bufi/icon%20LIKApos/icon.png?updatedAt=1763904694719">
+    <link rel="apple-touch-icon" href="https://ik.imagekit.io/bufi/icon%20LIKApos/icon.png?updatedAt=1763904694719">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://likaapps.com/">
+    <meta property="og:title" content="LIKApps | Future Software Ecosystem">
+    <meta property="og:description" content="Software. Unchained. Explore the suite: POS, File Transfer, Dev Tools. Free & Private.">
+    <meta property="og:image" content="https://ik.imagekit.io/bufi/icon%20LIKApos/icon.png?updatedAt=1763904694719">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://likaapps.com/">
+    <meta property="twitter:title" content="LIKApps | Future Software Ecosystem">
+    <meta property="twitter:description" content="Software. Unchained. Explore the suite: POS, File Transfer, Dev Tools. Free & Private.">
+    <meta property="twitter:image" content="https://ik.imagekit.io/bufi/icon%20LIKApos/icon.png?updatedAt=1763904694719">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Fonts: Inter Tight & JetBrains Mono -->
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,800;1,400&family=JetBrains+Mono:wght@500;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 
     <script>
         tailwind.config = {
@@ -22,6 +45,7 @@
                     fontFamily: {
                         sans: ['Inter Tight', 'sans-serif'],
                         mono: ['JetBrains Mono', 'monospace'],
+                        share: ['Space Grotesk', 'monospace'],
                     },
                     colors: {
                         brand: {
@@ -96,27 +120,35 @@
     </script>
 
     <style>
-        /* SUPER SMOOTH SCROLL ARCHITECTURE */
         html {
             scroll-behavior: smooth !important;
-            scroll-padding-top: 100px; /* Reduced for mobile */
+            scroll-padding-top: 100px;
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         body {
             height: 100%;
+            width: 100%;
             margin: 0;
+            padding: 0;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden;
+            max-width: 100vw;
+            position: relative;
         }
 
-        /* DEFAULT (Mobile First): No snap, allow natural scroll */
+        /* DEFAULT (Mobile First) */
         #snap-container {
             height: auto;
+            width: 100%;
             overflow-y: auto;
             overflow-x: hidden;
             scroll-snap-type: none;
             padding-bottom: 20px;
+            max-width: 100vw;
         }
 
         .snap-section {
@@ -124,14 +156,14 @@
             padding-top: 100px; 
             padding-bottom: 40px;
             box-sizing: border-box;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
-        /* DESKTOP (md and up): Enable Scroll Snapping */
+        /* DESKTOP */
         @media (min-width: 768px) {
-            body {
-                overflow: hidden;
-            }
-            
+            body { overflow: hidden; }
             #snap-container {
                 height: 100vh;
                 overflow-y: scroll;
@@ -140,11 +172,7 @@
                 scrollbar-width: none; 
                 -ms-overflow-style: none;
             }
-            
-            #snap-container::-webkit-scrollbar { 
-                display: none; 
-            }
-
+            #snap-container::-webkit-scrollbar { display: none; }
             .snap-section {
                 scroll-snap-align: start;
                 min-height: 100vh;
@@ -154,10 +182,11 @@
                 position: relative;
                 padding-top: 120px; 
                 padding-bottom: 0;
+                overflow: visible;
             }
         }
 
-        /* PROFESSIONAL CARD STYLING */
+        /* CARD STYLING */
         .spotlight-card {
             position: relative;
             overflow: hidden;
@@ -167,216 +196,110 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             backdrop-filter: blur(10px);
         }
-
         .spotlight-card:hover {
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             border-color: rgba(37, 99, 235, 0.2); 
         }
-        
         .dark .spotlight-card {
             background: rgba(10, 10, 10, 0.8);
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: none;
         }
-
-        /* The moving light */
         .spotlight-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(
-                800px circle at var(--mouse-x) var(--mouse-y), 
-                rgba(37, 99, 235, 0.05), 
-                transparent 40%
-            );
-            z-index: 1;
-            opacity: 0; 
-            transition: opacity 0.5s;
-            pointer-events: none;
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(37, 99, 235, 0.05), transparent 40%);
+            z-index: 1; opacity: 0; transition: opacity 0.5s; pointer-events: none;
         }
-
         .dark .spotlight-card::before {
-             background: radial-gradient(
-                800px circle at var(--mouse-x) var(--mouse-y), 
-                rgba(255, 255, 255, 0.06),
-                transparent 40%
-            );
+             background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
         }
+        .spotlight-card:hover::before { opacity: 1; }
 
-        .spotlight-card:hover::before {
-            opacity: 1;
-        }
-
-        /* GRAIN OVERLAY */
         .noise-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.03; 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9999; opacity: 0.03; 
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* MAGNETIC BUTTON */
-        .magnetic-btn {
-            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* SWITCHERS - HIGH VISIBILITY */
+        .magnetic-btn { transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .lang-switch {
-            position: relative;
-            width: 60px; /* Smaller for mobile */
-            height: 32px; 
-            background-color: #e5e7eb; 
-            border-radius: 9999px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 6px;
-            font-size: 10px;
-            font-weight: 900;
-            color: #000; /* Solid Black */
-            border: 2px solid rgba(0,0,0,0.1);
+            position: relative; width: 60px; height: 32px; 
+            background-color: #e5e7eb; border-radius: 9999px;
+            cursor: pointer; transition: background-color 0.3s;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 6px; font-size: 10px; font-weight: 900;
+            color: #000; border: 2px solid rgba(0,0,0,0.1);
         }
-        
-        @media (min-width: 768px) {
-            .lang-switch {
-                width: 70px;
-                height: 36px;
-                padding: 0 8px;
-                font-size: 11px;
-            }
-        }
-
-        .dark .lang-switch { 
-            background-color: #1a1a1a; 
-            color: #fff; /* Solid White */
-            border-color: rgba(255,255,255,0.2); 
-        }
+        @media (min-width: 768px) { .lang-switch { width: 70px; height: 36px; padding: 0 8px; font-size: 11px; } }
+        .dark .lang-switch { background-color: #1a1a1a; color: #fff; border-color: rgba(255,255,255,0.2); }
         .lang-switch::after {
             content: ''; position: absolute; top: 3px; left: 3px; 
-            width: 22px; height: 22px;
-            background-color: white; border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            width: 22px; height: 22px; background-color: white; border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3); transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
         }
-        
-        @media (min-width: 768px) {
-            .lang-switch::after {
-                top: 4px; left: 4px; 
-                width: 24px; height: 24px;
-            }
-        }
-
+        @media (min-width: 768px) { .lang-switch::after { top: 4px; left: 4px; width: 24px; height: 24px; } }
         .lang-switch.active::after { transform: translateX(28px); }
-        @media (min-width: 768px) {
-            .lang-switch.active::after { transform: translateX(34px); }
-        }
-
+        @media (min-width: 768px) { .lang-switch.active::after { transform: translateX(34px); } }
         .dark .lang-switch::after { background-color: #525252; }
 
-        /* THE BUG */
-        #the-bug {
-            position: absolute; font-size: 1.5rem; color: #ef4444;
-            transition: all 0.2s ease-out; cursor: crosshair; z-index: 40;
-        }
+        #the-bug { position: absolute; font-size: 1.5rem; color: #ef4444; transition: all 0.2s ease-out; cursor: crosshair; z-index: 40; }
+        .price-tag-container { transform-origin: top center; animation: swing 3s ease-in-out infinite; }
+        .spotlight-card:hover .price-tag-container { animation: swingWild 0.4s ease-in-out infinite; }
+        #scary-overlay { position: fixed; inset: 0; background: black; z-index: 99999; display: none; align-items: center; justify-content: center; mix-blend-mode: exclusion; }
+        .scary-active { filter: invert(1) contrast(2); }
+        .type-cursor { display: inline-block; width: 3px; height: 1.2em; background-color: currentColor; margin-left: 2px; vertical-align: bottom; animation: cursorBlink 1s step-end infinite; }
+        #glass-popup { pointer-events: none; transition: opacity 0.5s ease-out; }
 
-        /* HANGING TAG ANIMATION */
-        .price-tag-container {
-            transform-origin: top center;
-            animation: swing 3s ease-in-out infinite;
+        /* LIKAshare Squircle */
+        .squircle {
+            width: 64px; height: 64px; border-radius: 18px; display: flex; align-items: center; justify-content: center;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden;
+            background: #1c1c1e; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); color: white; border: 1px solid rgba(255,255,255,0.1);
         }
-        
-        .spotlight-card:hover .price-tag-container {
-            animation: swingWild 0.4s ease-in-out infinite;
-        }
-
-        /* SCARY MODE OVERLAY */
-        #scary-overlay {
-            position: fixed; inset: 0; background: black; z-index: 99999;
-            display: none; align-items: center; justify-content: center;
-            mix-blend-mode: exclusion;
-        }
-        .scary-active {
-            filter: invert(1) contrast(2);
-        }
-        
-        /* TYPEWRITER CURSOR */
-        .type-cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1.2em;
-            background-color: currentColor;
-            margin-left: 2px;
-            vertical-align: bottom;
-            animation: cursorBlink 1s step-end infinite;
-        }
-
-        #glass-popup {
-            pointer-events: none; 
-            transition: opacity 0.5s ease-out;
-        }
+        .squircle::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(to bottom, rgba(255,255,255,0.15), transparent); pointer-events: none; }
+        .dark .squircle { background: #ffffff; box-shadow: 0 0 30px rgba(255, 255, 255, 0.3); color: #000000; border: none; }
+        .dark .squircle::after { background: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(255,255,255,0)); }
+        .group:hover .squircle { transform: scale(1.1) rotate(6deg); }
     </style>
 </head>
 <body class="bg-[#f8f9fa] text-neutral-900 dark:bg-black dark:text-brand-white transition-colors duration-700 font-sans selection:bg-blue-500 selection:text-white">
 
-    <!-- Noise Texture -->
     <div class="noise-overlay"></div>
-    
-    <!-- Scary Overlay -->
-    <div id="scary-overlay">
-        <i class="fas fa-ghost text-9xl text-white animate-ping"></i>
-    </div>
+    <div id="scary-overlay"><i class="fas fa-ghost text-9xl text-white animate-ping"></i></div>
 
-    <!-- Navigation (Floating) -->
+    <!-- Navigation -->
     <nav class="fixed top-2 md:top-6 left-0 w-full z-50 px-2 md:px-6">
         <div class="max-w-6xl mx-auto bg-white/95 dark:bg-brand-gray/90 backdrop-blur-xl border border-black/10 dark:border-white/10 rounded-full px-3 md:px-6 py-2 md:py-4 flex justify-between items-center shadow-2xl shadow-black/10 relative">
             
-            <!-- NEW LOGO: Typewriter Effect -->
             <a href="#hero" class="flex items-center gap-2 md:gap-3 group magnetic-btn no-underline">
                 <div class="w-8 h-8 md:w-10 md:h-10 bg-black dark:bg-white text-white dark:text-black rounded-lg md:rounded-xl flex items-center justify-center font-mono font-bold text-sm md:text-lg shadow-md border border-gray-400 dark:border-transparent">
                     &gt;_
                 </div>
-                <div class="font-bold tracking-tight text-lg md:text-xl flex items-center">
+                <!-- FIX: Added w-[120px] to prevent jitter during typewriter effect -->
+                <div class="w-[120px] font-bold tracking-tight text-lg md:text-xl flex items-center">
                     <span class="text-black dark:text-white">LIK</span>
                     <span id="typewriter-text" class="text-black dark:text-white">Apps</span><span class="type-cursor"></span>
                 </div>
             </a>
 
-            <!-- CENTER: BUSINESS BUTTON (Static & Flashing, NO POPUP) -->
             <div class="relative hidden md:block">
-                <!-- Removed magnetic-btn class, added animate-pulse-slow -->
                 <a href="#contact" id="business-btn" class="flex items-center gap-2 px-6 py-3 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 transition-all cursor-pointer border border-blue-300 dark:border-blue-500/20 animate-pulse">
                     <span data-key="nav.business">Business</span>
                     <i class="fas fa-briefcase"></i>
                 </a>
             </div>
 
-            <!-- Right Controls (Compact on Mobile) -->
             <div class="flex items-center gap-2 w-auto justify-end relative">
-                
-                <!-- Theme Toggle -->
                 <button id="theme-btn" class="w-8 h-8 md:w-11 md:h-11 rounded-full bg-gray-200 dark:bg-white/10 flex items-center justify-center text-black dark:text-white hover:bg-yellow-400/20 hover:text-yellow-600 transition-all magnetic-btn shadow-md border border-gray-300 dark:border-white/20 text-sm md:text-xl">
                     <i class="fas fa-sun block dark:hidden"></i>
                     <i class="fas fa-moon hidden dark:block"></i>
                 </button>
 
-                <!-- Language Switch -->
                 <div class="relative group">
                     <div id="lang-switch" class="lang-switch magnetic-btn shadow-inner mx-1" title="Switch Language">
                         <span>SQ</span>
                         <span>EN</span>
                     </div>
-
-                    <!-- REVISED POPUP: Below Button -->
                     <div id="glass-popup" class="absolute top-full mt-2 left-1/2 -translate-x-1/2 w-[110px] bg-white/90 dark:bg-neutral-800/90 backdrop-blur-md border border-gray-200 dark:border-neutral-700 rounded-lg p-2 z-50 shadow-xl flex flex-col items-center justify-center">
                         <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-white/90 dark:bg-neutral-800/90 rotate-45 border-t border-l border-gray-200 dark:border-neutral-700"></div>
                         <span class="text-[10px] font-bold text-black dark:text-white whitespace-nowrap">Apo don shqip?</span>
@@ -384,12 +307,10 @@
                     </div>
                 </div>
                 
-                <!-- Ghost Button -->
                 <div class="relative">
                     <button id="funny-mode-btn" class="w-8 h-8 md:w-11 md:h-11 rounded-full bg-gray-200 dark:bg-white/10 flex items-center justify-center text-black dark:text-white hover:bg-red-600 hover:text-white transition-all magnetic-btn shadow-md border border-gray-300 dark:border-white/20 text-sm md:text-xl group relative overflow-hidden" title="???">
                         <i class="fas fa-ghost group-hover:animate-bounce"></i>
                     </button>
-                    <!-- GHOST POPUP TRIGGER -->
                     <div id="ghost-trigger-popup" class="absolute top-full mt-2 right-0 w-max bg-red-600 text-white px-3 py-1 rounded-lg text-xs font-bold shadow-lg opacity-0 pointer-events-none transition-all duration-300 transform -translate-y-2 z-[100]">
                         Click Me! 👻
                         <div class="absolute -top-1 right-3 w-3 h-3 bg-red-600 rotate-45"></div>
@@ -404,10 +325,7 @@
 
         <!-- SECTION 1: HERO -->
         <section id="hero" class="snap-section px-4 md:px-6 overflow-hidden">
-            <!-- Background Aurora -->
             <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] md:w-[800px] h-[300px] md:h-[500px] bg-blue-500/10 dark:bg-blue-500/20 rounded-full blur-[80px] md:blur-[120px] animate-float pointer-events-none"></div>
-
-            <!-- THE BUG -->
             <div id="the-bug" class="hidden md:block top-1/4 left-1/4" title="Catch me if you can!"><i class="fas fa-bug"></i></div>
 
             <div class="text-center max-w-5xl mx-auto relative z-10 animate-[fadeInUp_0.8s_ease-out_forwards]">
@@ -431,14 +349,12 @@
                     </a>
                 </div>
             </div>
-
-            <!-- Scroll Indicator -->
             <div class="absolute bottom-10 animate-bounce opacity-30 text-black dark:text-white hidden md:block">
                 <i class="fas fa-chevron-down text-2xl"></i>
             </div>
         </section>
 
-        <!-- SECTION 2: THE SUITE (Bento Grid) -->
+        <!-- SECTION 2: THE SUITE (Expanded Bento Grid) -->
         <section id="suite" class="snap-section px-4 md:px-6 bg-white dark:bg-brand-dark transition-colors">
             <div class="max-w-7xl mx-auto w-full py-10 md:py-20">
                 <div class="mb-6 md:mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-2">
@@ -448,77 +364,131 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 grid-rows-auto md:grid-rows-2 gap-4 md:gap-6 md:h-[650px]">
+                <!-- EXPANDED GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-auto">
                     
-                    <!-- LIKApos (Featured - Large) -->
+                    <!-- LIKApos - ADDED PROGRESS BAR -->
                     <div id="pos-card" class="spotlight-card md:col-span-2 md:row-span-2 rounded-3xl p-6 md:p-12 flex flex-col justify-between group cursor-pointer transition-all">
                         <div class="relative z-10">
                             <div class="flex gap-2 mb-4 md:mb-6 items-center flex-wrap">
                                 <span class="px-2 py-1 bg-green-100 dark:bg-green-500/10 text-green-700 dark:text-green-500 text-xs font-bold rounded uppercase border border-green-200 dark:border-green-500/20">Live</span>
-                                
-                                <!-- THE NEW FUNNY PRICE TAG (Swinging) -->
                                 <div class="relative price-tag-container z-20">
-                                    <div class="w-1 h-4 bg-gray-300 dark:bg-gray-600 mx-auto"></div> <!-- String -->
-                                    <div class="px-3 py-1 bg-yellow-400 text-black text-sm font-black uppercase rounded shadow-lg border-2 border-yellow-500 -rotate-6 transform hover:scale-110 transition-transform cursor-help whitespace-nowrap" id="price-tag-text">
-                                        $0.00
-                                    </div>
+                                    <div class="w-1 h-4 bg-gray-300 dark:bg-gray-600 mx-auto"></div>
+                                    <div class="px-3 py-1 bg-yellow-400 text-black text-sm font-black uppercase rounded shadow-lg border-2 border-yellow-500 -rotate-6 transform hover:scale-110 transition-transform cursor-help whitespace-nowrap" id="price-tag-text">$0.00</div>
                                 </div>
-
                                 <span class="px-2 py-1 bg-purple-100 dark:bg-purple-500/10 text-purple-700 dark:text-purple-500 text-xs font-bold rounded uppercase border border-purple-200 dark:border-purple-500/20 animate-pulse ml-2">v3.1</span>
                             </div>
-                            <h3 class="text-3xl md:text-6xl font-bold mb-4 text-neutral-900 dark:text-white">LIKApos</h3>
-                            
+                            <h3 class="text-3xl md:text-6xl font-bold mb-4 text-neutral-900 dark:text-white">LIKA<span class="text-blue-600 dark:text-blue-500">pos</span></h3>
                             <p class="text-sm md:text-lg text-gray-600 dark:text-gray-400 max-w-lg leading-relaxed mb-4" data-key="pos.desc">
-                                The industry-standard offline-first POS system. Engineered for Windows & Web to run seamlessly on mobile, tablet, and desktop. Includes full inventory tracking.
+                                The industry-standard offline-first POS system. Engineered for Windows & Web. Includes full inventory tracking.
                             </p>
+                            
+                            <!-- NEW PROGRESS BAR FOR POS -->
+                            <div class="mb-6 max-w-md">
+                                <div class="w-full bg-gray-200 dark:bg-gray-800 h-1 rounded-full overflow-hidden">
+                                    <div class="bg-red-500 h-full w-[45%]"></div>
+                                </div>
+                                <p class="text-xs text-red-600 dark:text-red-500 mt-2 font-mono font-bold">Development: 45%</p>
+                            </div>
                         </div>
                         
-                        <!-- Buttons & Visual -->
                         <div class="mt-8 flex flex-col md:flex-row items-start md:items-end justify-between relative z-10 gap-6">
                             <div class="flex flex-col gap-4 w-full md:w-auto">
-                                <!-- Preview Button -->
                                 <a href="https://pos-site.likaapps.com/" target="_blank" class="w-full md:w-fit px-6 py-3 md:px-8 md:py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
                                     <span data-key="btn.preview">Preview</span> <i class="fas fa-eye text-xs"></i>
                                 </a>
-
-                                <!-- Platform Icons -->
                                 <div class="flex items-center justify-center md:justify-start gap-4 text-gray-400 dark:text-gray-500">
-                                    <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Windows"><i class="fab fa-windows text-xl"></i></a>
-                                    <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Web"><i class="fas fa-globe text-xl"></i></a>
-                                    <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Mobile"><i class="fas fa-mobile-alt text-xl"></i></a>
-                                    <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Tablet"><i class="fas fa-tablet-alt text-xl"></i></a>
-                                    <a href="https://pos-site.likaapps.com/" target="_blank" class="hover:text-blue-600 dark:hover:text-blue-500 transition-colors transform hover:scale-110" title="Desktop"><i class="fas fa-desktop text-xl"></i></a>
+                                    <i class="fab fa-windows text-xl hover:text-blue-600 transition-colors"></i>
+                                    <i class="fas fa-globe text-xl hover:text-blue-600 transition-colors"></i>
+                                    <i class="fas fa-mobile-alt text-xl hover:text-blue-600 transition-colors"></i>
                                 </div>
                             </div>
-
-                            <!-- Interactive Exploding Icon -->
                             <div class="relative group/icon self-center md:self-end">
-                                <img 
-                                    id="pos-icon"
-                                    src="https://ik.imagekit.io/bufi/icon%20LIKApos/icon.png?updatedAt=1763904694719" 
-                                    alt="LIKApos Icon" 
-                                    class="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl transition-transform duration-300 hover:scale-110 active:scale-95 cursor-pointer z-20 relative"
-                                    onclick="triggerExplosion(this)"
-                                >
-                                <!-- Scare Text Container -->
+                                <img id="pos-icon" src="https://ik.imagekit.io/bufi/icon%20LIKApos/icon.png?updatedAt=1763904694719" alt="LIKApos Icon" class="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-2xl transition-transform duration-300 hover:scale-110 active:scale-95 cursor-pointer z-20 relative" onclick="triggerExplosion(this)">
                                 <div id="scare-text" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300">
-                                    <span class="text-2xl md:text-3xl font-black text-red-600 dark:text-red-500 uppercase tracking-tighter rotate-[-10deg] drop-shadow-lg" id="scare-msg">
-                                        ARE YOU SCARED?
-                                    </span>
+                                    <span class="text-2xl md:text-3xl font-black text-red-600 dark:text-red-500 uppercase tracking-tighter rotate-[-10deg] drop-shadow-lg" id="scare-msg">ARE YOU SCARED?</span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LIKAshare -->
+                    <div class="spotlight-card md:col-span-1 md:row-span-2 rounded-3xl p-8 flex flex-col justify-between group relative overflow-hidden hover:-translate-y-1 bg-gradient-to-b from-blue-50 to-white dark:from-blue-900/10 dark:to-black">
+                        <div class="absolute -right-12 -top-12 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl group-hover:bg-blue-500/20 transition-all pointer-events-none"></div>
+                        <div class="relative z-10">
+                            <div class="flex gap-2 mb-4">
+                                <span class="px-2 py-1 bg-green-100 dark:bg-green-500/10 text-green-700 dark:text-green-500 text-xs font-bold rounded uppercase border border-green-200 dark:border-green-500/20">Live</span>
+                                <span class="px-2 py-1 bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-500 text-xs font-bold rounded uppercase border border-blue-200 dark:border-blue-500/20">Free</span>
+                                <span class="px-2 py-1 bg-purple-100 dark:bg-purple-500/10 text-purple-700 dark:text-purple-500 text-xs font-bold rounded uppercase border border-purple-200 dark:border-purple-500/20">v1.0</span>
+                            </div>
+                            <div class="mt-6">
+                                <div class="squircle mb-6 shadow-2xl">
+                                    <span class="font-share font-bold text-2xl tracking-tighter text-white dark:text-black">&lt;&amp;&gt;</span>
+                                </div>
+                                <h3 class="text-3xl font-bold mb-3 text-neutral-900 dark:text-white">LIKA<span class="text-blue-600 dark:text-blue-500">share</span></h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-medium" data-key="share.desc">
+                                    Experience the future of file transfer. Powered by WebRTC for limitless Peer-to-Peer sharing. No servers, no logs.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="mt-8 relative z-10">
+                            <div class="mb-6">
+                                <div class="w-full bg-gray-200 dark:bg-gray-800 h-1 rounded-full overflow-hidden">
+                                    <div class="bg-green-500 h-full w-[95%]"></div>
+                                </div>
+                                <p class="text-xs text-green-600 dark:text-green-500 mt-2 font-mono font-bold">Development: 95%</p>
+                            </div>
+                            <a href="https://share.likaapps.com/" target="_blank" class="w-full px-6 py-3 bg-[#007AFF] hover:bg-blue-600 text-white rounded-xl font-bold transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 flex items-center justify-center gap-2 group-hover:scale-105">
+                                <span data-key="btn.open">Open App</span> <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                            <div class="mt-6 flex items-center justify-center gap-4 text-gray-400 dark:text-gray-500">
+                                <i class="fas fa-mobile-screen text-lg" title="Mobile"></i>
+                                <i class="fas fa-tablet-screen-button text-lg" title="Tablet"></i>
+                                <i class="fas fa-desktop text-lg" title="Desktop"></i>
+                                <i class="fas fa-globe text-lg" title="Web"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LIKAdev - WITH PROGRESS BAR -->
+                    <div class="spotlight-card rounded-3xl p-8 flex flex-col justify-between group relative overflow-hidden hover:-translate-y-1">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 dark:opacity-20 group-hover:opacity-30 dark:group-hover:opacity-40 transition-opacity text-black dark:text-white"><i class="fas fa-laptop-code text-6xl"></i></div>
+                        <div>
+                            <div class="flex gap-2 mb-3 flex-wrap">
+                                <span class="px-2 py-1 bg-blue-100 dark:bg-blue-500/10 text-blue-700 dark:text-blue-500 text-xs font-bold rounded uppercase border border-blue-200 dark:border-blue-500/20">Free</span>
+                                <span class="px-2 py-1 bg-yellow-100 dark:bg-yellow-500/10 text-yellow-700 dark:text-yellow-500 text-xs font-bold rounded uppercase border border-yellow-200 dark:border-yellow-500/20">In Progress</span>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3 text-neutral-900 dark:text-white">LIKA<span class="text-blue-600 dark:text-blue-500">dev</span></h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-500 leading-relaxed font-medium" data-key="dev.desc">
+                                Real-time cross-device preview tool for developers. See your code on multiple screens instantly.
+                            </p>
+                        </div>
+                        
+                        <!-- Added Progress Bar Here -->
+                        <div class="mt-6">
+                            <div class="w-full bg-gray-200 dark:bg-gray-800 h-1 rounded-full overflow-hidden">
+                                <div class="bg-green-500 h-full w-[88%]"></div>
+                            </div>
+                            <p class="text-xs text-green-600 dark:text-green-500 mt-2 font-mono font-bold">Development: 88%</p>
+                        
+                            <div class="mt-4 flex items-center justify-between">
+                                <div class="text-gray-400 dark:text-gray-500" title="Desktop Only">
+                                    <i class="fas fa-desktop text-2xl"></i>
+                                </div>
+                                <a href="https://dev.likaapps.com/" target="_blank" class="text-blue-600 dark:text-blue-400 font-bold text-sm hover:underline flex items-center gap-1">
+                                    <span data-key="btn.try">Try Console</span> <i class="fas fa-external-link-alt text-xs"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
 
                     <!-- LIKAsys -->
                     <div class="spotlight-card rounded-3xl p-8 flex flex-col justify-between group relative overflow-hidden hover:-translate-y-1">
-                        <div class="absolute top-0 right-0 p-4 opacity-10 dark:opacity-20 group-hover:opacity-30 dark:group-hover:opacity-40 transition-opacity text-black dark:text-white">
-                            <i class="fas fa-server text-6xl"></i>
-                        </div>
+                        <div class="absolute top-0 right-0 p-4 opacity-10 dark:opacity-20 group-hover:opacity-30 dark:group-hover:opacity-40 transition-opacity text-black dark:text-white"><i class="fas fa-server text-6xl"></i></div>
                         <div>
-                            <h3 class="text-2xl font-bold mb-3 text-neutral-900 dark:text-white">LIKAsys</h3>
+                            <h3 class="text-2xl font-bold mb-3 text-neutral-900 dark:text-white">LIKA<span class="text-blue-600 dark:text-blue-500">sys</span></h3>
                             <p class="text-sm text-gray-600 dark:text-gray-500 leading-relaxed font-medium" data-key="sys.desc">
-                                A specialized Point of Sale engineered for complex I.T. infrastructures. Features deep server integration, multi-node sync, and advanced hardware API.
+                                POS engineered for complex I.T. infrastructures. Deep server integration & API.
                             </p>
                         </div>
                         <div class="mt-6">
@@ -531,13 +501,11 @@
 
                     <!-- LIKAscan -->
                     <div class="spotlight-card rounded-3xl p-8 flex flex-col justify-between group relative overflow-hidden hover:-translate-y-1">
-                        <div class="absolute top-0 right-0 p-4 opacity-10 dark:opacity-20 group-hover:opacity-30 dark:group-hover:opacity-40 transition-opacity text-black dark:text-white">
-                            <i class="fas fa-barcode text-6xl"></i>
-                        </div>
+                        <div class="absolute top-0 right-0 p-4 opacity-10 dark:opacity-20 group-hover:opacity-30 dark:group-hover:opacity-40 transition-opacity text-black dark:text-white"><i class="fas fa-barcode text-6xl"></i></div>
                         <div>
-                            <h3 class="text-2xl font-bold mb-3 text-neutral-900 dark:text-white">LIKAscan</h3>
+                            <h3 class="text-2xl font-bold mb-3 text-neutral-900 dark:text-white">LIKA<span class="text-blue-600 dark:text-blue-500">scan</span></h3>
                             <p class="text-sm text-gray-600 dark:text-gray-500 leading-relaxed font-medium" data-key="scan.desc">
-                                Next-generation inventory scanning utility. Utilizes camera APIs for ultra-fast barcode recognition, QR parsing, and instant database lookups.
+                                Next-gen inventory scanning. Camera APIs for ultra-fast barcode recognition.
                             </p>
                         </div>
                         <div class="mt-6">
@@ -547,26 +515,24 @@
                             <p class="text-xs text-orange-600 dark:text-orange-500 mt-2 font-mono font-bold">Development: 30%</p>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 3: CONTACT (The Void) -->
+        <!-- SECTION 3: CONTACT -->
         <section id="contact" class="snap-section px-4 md:px-6 relative bg-[#f3f4f6] dark:bg-black transition-colors">
-            <!-- Footer Content -->
             <div class="max-w-5xl mx-auto text-center w-full">
                 <h2 class="text-4xl md:text-8xl font-bold tracking-tighter mb-10 md:mb-16 hover:text-blue-600 dark:hover:text-blue-500 transition-colors duration-500 cursor-default text-neutral-900 dark:text-white" data-key="footer.title">
                     Let's Build.
                 </h2>
-
-                <!-- Updated Grid for 3 Items -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-12">
-                    <!-- Email Card - CLICK TO COPY -->
+                    
+                    <!-- Email Card -->
                     <div onclick="copyEmail()" class="group spotlight-card rounded-2xl p-8 md:p-10 flex flex-col items-center justify-center transition-transform hover:-translate-y-2 cursor-pointer active:scale-95">
                         <i class="fas fa-envelope text-4xl mb-4 text-gray-400 group-hover:text-blue-500 transition-colors"></i>
                         <span class="text-xl font-bold text-neutral-900 dark:text-white">Email</span>
-                        <span id="email-text" class="text-sm text-gray-500 mt-2 font-mono">likapps@proton.me</span>
-                        
+                        <span id="email-text" class="text-sm text-gray-500 mt-2 font-mono">lika.apps@proton.me</span>
                         <div class="h-8 overflow-hidden mt-6 w-full relative">
                             <div class="absolute inset-0 flex flex-col items-center transition-transform duration-300 group-hover:-translate-y-8">
                                 <p class="text-sm text-gray-400 font-medium" data-key="email.normal">Business Inquiries Only</p>
@@ -575,12 +541,11 @@
                         </div>
                     </div>
 
-                    <!-- Instagram Card - DIRECT LINK -->
+                    <!-- Instagram Card -->
                     <a href="https://instagram.com/lika.apps" target="_blank" class="group spotlight-card rounded-2xl p-8 md:p-10 flex flex-col items-center justify-center transition-transform hover:-translate-y-2">
                         <i class="fab fa-instagram text-4xl mb-4 text-gray-400 group-hover:text-pink-500 transition-colors"></i>
                         <span class="text-xl font-bold text-neutral-900 dark:text-white">Instagram</span>
                         <span class="text-sm text-gray-500 mt-2 font-mono">@lika.apps</span>
-                        
                         <div class="h-8 overflow-hidden mt-6 w-full relative">
                             <div class="absolute inset-0 flex flex-col items-center transition-transform duration-300 group-hover:-translate-y-8">
                                 <p class="text-sm text-gray-400 font-medium" data-key="insta.normal">Follow the journey</p>
@@ -589,29 +554,28 @@
                         </div>
                     </a>
 
-                    <!-- TikTok Card - DIRECT LINK (NEW) -->
-                    <a href="https://tiktok.com/@lika.apps" target="_blank" class="group spotlight-card rounded-2xl p-8 md:p-10 flex flex-col items-center justify-center transition-transform hover:-translate-y-2">
-                        <i class="fab fa-tiktok text-4xl mb-4 text-gray-400 group-hover:text-black dark:group-hover:text-white transition-colors"></i>
-                        <span class="text-xl font-bold text-neutral-900 dark:text-white">TikTok</span>
-                        <span class="text-sm text-gray-500 mt-2 font-mono">@lika.apps</span>
-                        
+                    <!-- WhatsApp Card (New Smart Link) -->
+                    <div onclick="handleWhatsappClick()" class="group spotlight-card rounded-2xl p-8 md:p-10 flex flex-col items-center justify-center transition-transform hover:-translate-y-2 cursor-pointer">
+                        <i class="fab fa-whatsapp text-4xl mb-4 text-gray-400 group-hover:text-green-500 transition-colors"></i>
+                        <span class="text-xl font-bold text-neutral-900 dark:text-white">WhatsApp</span>
+                        <span class="text-sm text-gray-500 mt-2 font-mono">Support Chat</span>
                         <div class="h-8 overflow-hidden mt-6 w-full relative">
                             <div class="absolute inset-0 flex flex-col items-center transition-transform duration-300 group-hover:-translate-y-8">
-                                <p class="text-sm text-gray-400 font-medium" data-key="tiktok.normal">Watch the magic</p>
-                                <p class="text-sm text-black dark:text-white font-bold mt-4 whitespace-nowrap" data-key="tiktok.funny">We don't dance, we create.</p>
+                                <p class="text-sm text-gray-400 font-medium" data-key="wa.normal">Direct Support</p>
+                                <p class="text-sm text-green-500 font-bold mt-4" data-key="wa.funny">Chat with Humans 💬</p>
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
 
-                <!-- TERMINAL TYPING INTERACTION -->
+                </div>
+                
                 <div class="w-full max-w-2xl mx-auto text-left mb-12 px-2">
                     <div class="font-mono text-sm md:text-base text-gray-500 dark:text-gray-400 min-h-[60px] leading-relaxed">
                         <span class="text-green-600 dark:text-green-500 mr-2 font-bold select-none">➜</span>
                         <span id="terminal-text" class="text-gray-800 dark:text-gray-300"></span><span class="type-cursor text-green-600 dark:text-green-500 font-bold">|</span>
                     </div>
                 </div>
-
+                
                 <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-mono border-t border-gray-300 dark:border-gray-800 pt-8 gap-4">
                     <span>© <span id="year"></span> LIKApps</span>
                     <span class="flex items-center gap-2">
@@ -622,12 +586,35 @@
                 </div>
             </div>
         </section>
-
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- WHATSAPP QR MODAL (Hidden by default) -->
+    <div id="whatsapp-modal" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md hidden opacity-0 transition-opacity duration-300" onclick="closeWhatsappQr(event)">
+        <div class="bg-white dark:bg-neutral-900 p-6 rounded-3xl max-w-sm w-full mx-4 relative shadow-2xl transform scale-90 transition-transform duration-300" id="wa-modal-content">
+            <button onclick="closeWhatsappQr(null, true)" class="absolute top-4 right-4 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500 text-3xl">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Join Support Chat</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Scan this QR code with your phone to join our WhatsApp group.</p>
+                
+                <!-- QR Image -->
+                <div class="bg-white p-2 rounded-xl border border-gray-200 dark:border-neutral-800 inline-block shadow-inner mb-4">
+                    <img src="https://ik.imagekit.io/bufi/icon%20LIKApos/WhatsApp%20Image%202025-11-26%20at%2019.52.38_af3beecb.jpg" alt="WhatsApp QR" class="w-48 h-48 object-cover rounded-lg">
+                </div>
+                
+                <p class="text-xs text-gray-400">or click below if you have WhatsApp Desktop</p>
+                <a href="https://chat.whatsapp.com/Ie2Hcd3p4KkG2FtNsOk3rS" target="_blank" class="mt-4 block w-full py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-xl transition-colors">
+                    Open WhatsApp Desktop
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // --- 1. LANGUAGE & DATA ---
         const i18n = {
             en: {
                 "hero.pill": "Ecosystem Active",
@@ -638,17 +625,23 @@
                 "suite.title": "The Suite",
                 "suite.subtitle": "Designed for absolute performance.",
                 "pos.desc": "The industry-standard offline-first POS system. Engineered for Windows & Web to run seamlessly on mobile, tablet, and desktop. Includes full inventory tracking.",
+                "share.desc": "Experience the future of file transfer. Powered by WebRTC for limitless Peer-to-Peer sharing. No servers, no logs, and military-grade encryption. Works instantly on any device.",
+                "dev.desc": "Real-time cross-device preview tool for developers. See your code on multiple screens instantly.",
+                "sys.desc": "POS engineered for complex I.T. infrastructures. Deep server integration & API.",
+                "scan.desc": "Next-gen inventory scanning. Camera APIs for ultra-fast barcode recognition.",
                 "btn.launch": "Launch WebApp",
                 "btn.preview": "Preview",
+                "btn.open": "Open App",
+                "btn.try": "Try Console",
                 "nav.business": "Business",
-                "sys.desc": "A specialized Point of Sale engineered for complex I.T. infrastructures. Features deep server integration, multi-node sync, and advanced hardware API.",
-                "scan.desc": "Next-generation inventory scanning utility. Utilizes camera APIs for ultra-fast barcode recognition, QR parsing, and instant database lookups.",
                 "footer.title": "Let's Build.",
                 "email.normal": "Business Inquiries Only",
                 "email.funny": "Click to Copy 📋",
                 "email.copied": "Copied! ✅",
                 "insta.normal": "Follow the journey",
                 "insta.funny": "Influencer Mode 🤳",
+                "wa.normal": "Direct Support",
+                "wa.funny": "Chat with Humans 💬",
                 "tiktok.normal": "Watch the magic",
                 "tiktok.funny": "We don't dance, we create.",
                 "price.default": "$0.00"
@@ -663,17 +656,23 @@
                 "suite.title": "Paketa",
                 "suite.subtitle": "Dizajnuar për performancë absolute.",
                 "pos.desc": "Sistemi standard POS offline-first. E inxhinieruar për Windows & Web që të funksionojë pa probleme në celular, tablet dhe desktop. Përfshin gjurmimin e plotë të inventarit.",
+                "share.desc": "Përjetoni të ardhmen e transferimit të skedarëve. Fuqizuar nga WebRTC për shpërndarje pa limit Peer-to-Peer. Pa servera, pa logs, dhe me enkriptim ushtarak. Punon menjëherë në çdo pajisje.",
+                "dev.desc": "Mjet për zhvilluesit për të parë kodin në shumë pajisje menjëherë.",
+                "sys.desc": "POS i specializuar për infrastruktura komplekse T.I. Integrim i thellë serveri & API.",
+                "scan.desc": "Skanimi i gjeneratës tjetër. API të kamerës për njohje ultra të shpejtë të barkodit.",
                 "btn.launch": "Hap WebApp",
                 "btn.preview": "Shiko",
+                "btn.open": "Hap Aplikacionin",
+                "btn.try": "Provo Konsolën",
                 "nav.business": "Biznes",
-                "sys.desc": "Një Pikë Shitje (POS) e specializuar për infrastruktura komplekse T.I. Përmban integrim të thellë të serverit, sinkronizim me shumë nyje dhe mbështetje të avancuar API.",
-                "scan.desc": "Mjeti i gjeneratës tjetër për skanimin e inventarit. Përdor API-të e kamerës për njohjen ultra të shpejtë të barkodit, analizimin e QR dhe kërkimet e menjëhershme.",
                 "footer.title": "Le të Ndërtojmë.",
                 "email.normal": "Vetëm Për Biznes",
                 "email.funny": "Kliko për Kopjim 📋",
                 "email.copied": "U Kopjua! ✅",
                 "insta.normal": "Na ndiqni rrugëtimin",
                 "insta.funny": "Tu bo si Influencer 🤳",
+                "wa.normal": "Mbështetje Direkte",
+                "wa.funny": "Fol me njerz 💬",
                 "tiktok.normal": "Shiko magjinë",
                 "tiktok.funny": "S'kërcejmë, ne krijojmë.",
                 "price.default": "$0.00"
@@ -687,20 +686,14 @@
 
         let currentLang = 'en';
 
-        // --- 2. COPY EMAIL LOGIC ---
         function copyEmail() {
-            const email = "likapps@proton.me";
-            
-            // Fallback for iframe restrictions: use textarea and execCommand
+            const email = "lika.apps@proton.me";
             const textArea = document.createElement("textarea");
             textArea.value = email;
-            
-            // Ensure it's not visible but part of the DOM
             textArea.style.position = "fixed";
             textArea.style.left = "-9999px";
             textArea.style.top = "0";
             document.body.appendChild(textArea);
-            
             textArea.focus();
             textArea.select();
             
@@ -708,40 +701,58 @@
                 const successful = document.execCommand('copy');
                 if (successful) {
                      const feedbackEl = document.getElementById('email-feedback');
-                    
-                    // Change text to feedback
                     feedbackEl.innerText = i18n[currentLang]['email.copied'];
                     feedbackEl.classList.add('text-green-500');
                     feedbackEl.classList.remove('text-blue-500');
-
-                    // Reset after 2 seconds
                     setTimeout(() => {
                         feedbackEl.innerText = i18n[currentLang]['email.funny'];
                         feedbackEl.classList.remove('text-green-500');
                         feedbackEl.classList.add('text-blue-500');
                     }, 2000);
-                } else {
-                    throw new Error('Copy command failed');
                 }
             } catch (err) {
-                console.error('Fallback copy failed', err);
-                alert("Failed to copy email. Please copy manually: likapps@proton.me");
+                alert("Failed to copy email. Please copy manually: lika.apps@proton.me");
             }
-            
             document.body.removeChild(textArea);
         }
 
-        // --- 3. HELPER: SCRAMBLE TEXT (MATRIX EFFECT) ---
+        // --- WHATSAPP LOGIC ---
+        function handleWhatsappClick() {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (isMobile) {
+                window.location.href = "https://chat.whatsapp.com/Ie2Hcd3p4KkG2FtNsOk3rS";
+            } else {
+                const modal = document.getElementById('whatsapp-modal');
+                const content = document.getElementById('wa-modal-content');
+                modal.classList.remove('hidden');
+                // Animation
+                requestAnimationFrame(() => {
+                    modal.classList.remove('opacity-0');
+                    content.classList.remove('scale-90');
+                    content.classList.add('scale-100');
+                });
+            }
+        }
+
+        function closeWhatsappQr(e, force = false) {
+            if (force || e.target.id === 'whatsapp-modal') {
+                const modal = document.getElementById('whatsapp-modal');
+                const content = document.getElementById('wa-modal-content');
+                modal.classList.add('opacity-0');
+                content.classList.remove('scale-100');
+                content.classList.add('scale-90');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
         function animateTextChange(element, newHtml) {
-            // Set HTML immediately so layout is correct and we can access text nodes
             element.innerHTML = newHtml;
-            
-            // Traverse and find all text nodes
             const textNodes = [];
             function findTextNodes(node) {
                 if (node.nodeType === 3 && node.nodeValue.trim() !== '') {
                     textNodes.push({ node: node, original: node.nodeValue });
-                    // Start with scrambled text of same length
                     let scrambled = '';
                     const chars = '!<>-_\\/[]{}—=+*^?#';
                     for(let i=0; i<node.nodeValue.length; i++) scrambled += chars[Math.floor(Math.random()*chars.length)];
@@ -752,38 +763,29 @@
             }
             findTextNodes(element);
 
-            // Animate
             textNodes.forEach(item => {
                 const finalString = item.original;
                 const length = finalString.length;
                 let iteration = 0;
-                const totalIterations = 10; // Fast scramble
+                const totalIterations = 10;
                 
                 const interval = setInterval(() => {
                     let result = '';
                     const chars = '!<>-_\\/[]{}—=+*^?#';
-                    
                     for(let i = 0; i < length; i++) {
-                        // Logic: Reveal characters from left to right gradually
-                        if(i < (iteration / totalIterations) * length) {
-                            result += finalString[i];
-                        } else {
-                            result += chars[Math.floor(Math.random() * chars.length)];
-                        }
+                        if(i < (iteration / totalIterations) * length) result += finalString[i];
+                        else result += chars[Math.floor(Math.random() * chars.length)];
                     }
-                    
                     item.node.nodeValue = result;
                     iteration++;
-                    
                     if (iteration > totalIterations) {
                         clearInterval(interval);
-                        item.node.nodeValue = finalString; // Ensure exact final text
+                        item.node.nodeValue = finalString;
                     }
-                }, 40); // Speed of scramble updates
+                }, 40);
             });
         }
 
-        // --- 4. SPOTLIGHT EFFECT LOGIC ---
         function initSpotlight() {
             const cards = document.querySelectorAll(".spotlight-card");
             document.onmousemove = e => {
@@ -797,37 +799,26 @@
             };
         }
 
-        // --- 5. KOSOVO TIME & THEME INITIALIZATION ---
         let manualThemeOverride = false;
-
         function updateKosovoTime() {
             const date = new Date().toLocaleString("en-US", {timeZone: "Europe/Belgrade"});
             const now = new Date(date);
             const hours = now.getHours();
-            
-            // Theme Logic
             if (!manualThemeOverride) {
                 const isNight = hours >= 18 || hours < 6;
                 const html = document.documentElement;
-                if (isNight) {
-                    if(!html.classList.contains('dark')) html.classList.add('dark');
-                } else {
-                    if(html.classList.contains('dark')) html.classList.remove('dark');
-                }
+                if (isNight) { if(!html.classList.contains('dark')) html.classList.add('dark'); }
+                else { if(html.classList.contains('dark')) html.classList.remove('dark'); }
             }
         }
 
         function toggleTheme() {
             manualThemeOverride = true;
-            const html = document.documentElement;
-            html.classList.toggle('dark');
+            document.documentElement.classList.toggle('dark');
         }
 
-        // --- 6. MAGNETIC BUTTONS ---
         function initMagneticButtons() {
-            // Only init magnetic effect on desktop to save mobile performance
             if (window.innerWidth < 768) return;
-
             const btns = document.querySelectorAll('.magnetic-btn');
             btns.forEach(btn => {
                 btn.addEventListener('mousemove', (e) => {
@@ -836,29 +827,22 @@
                     const y = e.clientY - rect.top - rect.height / 2;
                     btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
                 });
-                btn.addEventListener('mouseleave', () => {
-                    btn.style.transform = 'translate(0px, 0px)';
-                });
+                btn.addEventListener('mouseleave', () => btn.style.transform = 'translate(0px, 0px)');
             });
         }
         
-        // --- 7. THE BUG LOGIC ---
         function initBug() {
             const bug = document.getElementById('the-bug');
             if(!bug) return;
-
             bug.addEventListener('mouseenter', () => {
                 const parentW = window.innerWidth;
                 const parentH = window.innerHeight;
-                
                 const newX = Math.random() * (parentW - 100);
                 const newY = Math.random() * (parentH - 100);
-                
                 bug.style.left = `${newX}px`;
                 bug.style.top = `${newY}px`;
                 bug.style.transform = `rotate(${Math.random() * 360}deg)`;
             });
-
             bug.addEventListener('click', () => {
                 bug.innerHTML = '<i class="fas fa-skull"></i>'; 
                 bug.style.color = 'black';
@@ -871,7 +855,6 @@
             });
         }
 
-        // --- 8. SOUND & EXPLOSION LOGIC ---
         function playExplosionSound() {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             if (!AudioContext) return;
@@ -879,9 +862,7 @@
             const bufferSize = ctx.sampleRate * 2;
             const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
             const data = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                data[i] = Math.random() * 2 - 1;
-            }
+            for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
             const noise = ctx.createBufferSource();
             noise.buffer = buffer;
             const filter = ctx.createBiquadFilter();
@@ -897,18 +878,14 @@
             noise.start();
         }
 
-        // --- GLASS CRACK SOUND ---
         function playGlassCrackSound() {
             const AudioContext = window.AudioContext || window.webkitAudioContext;
             if (!AudioContext) return;
             const ctx = new AudioContext();
-            const bufferSize = ctx.sampleRate * 0.1; // Short crack
+            const bufferSize = ctx.sampleRate * 0.1; 
             const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
             const data = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                data[i] = (Math.random() * 2 - 1) * Math.exp(-5 * i / bufferSize); // Decay noise
-            }
-            
+            for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-5 * i / bufferSize); 
             const noise = ctx.createBufferSource();
             noise.buffer = buffer;
             const gain = ctx.createGain();
@@ -955,7 +932,6 @@
 
         function triggerScaryMode() {
             const overlay = document.getElementById('scary-overlay');
-            // NO SOUND HERE
             document.body.classList.add('animate-shake-hard');
             document.documentElement.classList.add('scary-active');
             overlay.style.display = 'flex';
@@ -966,21 +942,16 @@
             }, 400);
         }
 
-        // --- GLASS BREAK POPUP LOGIC ---
         function initGlassPopup() {
             let count = 5;
             const popup = document.getElementById('glass-popup');
             const timer = document.getElementById('glass-timer');
-            
-            // Wait 1s before start
             setTimeout(() => {
                 const int = setInterval(() => {
                     count--;
                     if (timer) timer.innerText = count + "s";
-                    
                     if (count <= 0) {
                         clearInterval(int);
-                        // Trigger Break
                         if(popup) {
                             playGlassCrackSound();
                             popup.classList.add('glass-broken');
@@ -991,44 +962,28 @@
             }, 1000);
         }
 
-        // --- 10. CUSTOM LOGO TYPEWRITER LOGIC ---
         function initTypewriter() {
             const el = document.getElementById('typewriter-text');
             if(!el) return;
-
             const cycle = async () => {
-                // 1. Start: "Apps" (Normal Color)
                 el.textContent = "Apps";
                 el.className = "text-black dark:text-white"; 
-                await wait(2500); // Stay longer
-
-                // 2. Delete "pps" -> Leaves "A"
+                await wait(2500);
                 await typeString(el, "pps", true); 
-                await wait(600); // Pause on "LIKA"
-
-                // 3. Delete "A" -> Leaves ""
+                await wait(600);
                 await typeString(el, "A", true);
                 await wait(200);
-
-                // 4. Switch Color -> Type "Apps" (Blue)
                 el.className = "text-blue-600 dark:text-blue-500 font-bold";
                 await typeString(el, "Apps", false); 
-                await wait(3000); // Stay blue longer
-
-                // 5. Delete "Apps" (Blue) -> Leaves ""
+                await wait(3000);
                 await typeString(el, "Apps", true);
                 await wait(300);
-
-                // Loop
                 cycle();
             };
-
             cycle();
         }
 
-        function wait(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
+        function wait(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
         function typeString(element, text, isDeleting) {
             return new Promise(async resolve => {
@@ -1048,16 +1003,12 @@
             });
         }
 
-        // --- 11. TERMINAL TYPING INTERACTION (NEW) ---
         function initTerminal() {
             const el = document.getElementById('terminal-text');
             const popupTrigger = document.getElementById('ghost-trigger-popup');
             const textToType = "Do you want to do business? If yes, first you have to click the ghost button. If you are not scared, then we can do business.";
             let hasStarted = false;
-            
-            // Words that trigger the popup (must match textToType)
             const triggerPhrase = "click the ghost button";
-            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting && !hasStarted) {
@@ -1066,30 +1017,20 @@
                     }
                 });
             }, { threshold: 0.5 });
-            
             observer.observe(el);
 
             async function startTyping() {
                 const chars = textToType.split('');
                 let currentText = "";
-                
                 for (let i = 0; i < chars.length; i++) {
                     currentText += chars[i];
                     el.textContent = currentText;
-                    
-                    // Check if we just typed the trigger phrase
                     if (currentText.endsWith(triggerPhrase)) {
                          showGhostPopup();
-                         await wait(1500); // Pause for emphasis
+                         await wait(1500);
                     }
-
-                    // Humanize typing speed
-                    // Pauses on punctuation
-                    if (chars[i] === '.' || chars[i] === '?' || chars[i] === ',') {
-                        await wait(500 + Math.random() * 300);
-                    } else {
-                        await wait(30 + Math.random() * 50);
-                    }
+                    if (chars[i] === '.' || chars[i] === '?' || chars[i] === ',') await wait(500 + Math.random() * 300);
+                    else await wait(30 + Math.random() * 50);
                 }
             }
 
@@ -1097,8 +1038,6 @@
                 if(popupTrigger) {
                     popupTrigger.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-2');
                     popupTrigger.classList.add('animate-bounce');
-                    
-                    // Hide after a while
                     setTimeout(() => {
                         popupTrigger.classList.add('opacity-0', 'pointer-events-none', '-translate-y-2');
                         popupTrigger.classList.remove('animate-bounce');
@@ -1107,7 +1046,6 @@
             }
         }
 
-        // --- 12. INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             initSpotlight();
             initMagneticButtons();
@@ -1115,39 +1053,25 @@
             initFunnyPriceTag();
             initTypewriter();
             initTerminal(); 
-            initGlassPopup(); // Start glass popup logic
-            
+            initGlassPopup();
             updateKosovoTime(); 
             setInterval(updateKosovoTime, 1000); 
-            
             document.getElementById('theme-btn').addEventListener('click', toggleTheme);
             document.getElementById('year').innerText = new Date().getFullYear();
-
             const langSwitch = document.getElementById('lang-switch');
-            
             langSwitch.addEventListener('click', () => {
                 langSwitch.classList.toggle('active');
                 currentLang = currentLang === 'en' ? 'sq' : 'en';
-                
                 document.querySelectorAll('[data-key]').forEach(el => {
                     const key = el.getAttribute('data-key');
                     let newText = "";
-
-                    if (key === 'hero.title_unchained' && currentLang === 'sq') {
-                         newText = "Pa Pronarë.";
-                    } else if(i18n[currentLang][key]) {
-                        newText = i18n[currentLang][key];
-                    }
-
-                    // TRIGGER THE "WRRRRRR" MATRIX EFFECT
+                    if (key === 'hero.title_unchained' && currentLang === 'sq') newText = "Pa Pronarë.";
+                    else if(i18n[currentLang][key]) newText = i18n[currentLang][key];
                     if(newText) animateTextChange(el, newText);
                 });
             });
-
-            const funnyBtn = document.getElementById('funny-mode-btn');
-            funnyBtn.addEventListener('click', triggerScaryMode);
+            document.getElementById('funny-mode-btn').addEventListener('click', triggerScaryMode);
         });
-
     </script>
 </body>
 </html>

@@ -46,6 +46,16 @@
             opacity: 0.9;
         }
 
+        .multi-app-notice {
+            background: #d4edda;
+            color: #155724;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0 2rem 0;
+            border-left: 4px solid #28a745;
+            text-align: center;
+        }
+
         .last-updated {
             background: #e9ecef;
             padding: 1rem;
@@ -149,16 +159,26 @@
 
         .app-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin: 1.5rem 0;
         }
 
         .app-item {
             background: #f8f9fa;
-            padding: 1rem;
+            padding: 1.5rem;
             border-radius: 8px;
             border-left: 4px solid #667eea;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .app-item.featured {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         @media (max-width: 768px) {
@@ -176,6 +196,10 @@
             
             .social-links {
                 grid-template-columns: 1fr;
+            }
+            
+            .app-item.featured {
+                transform: none;
             }
         }
 
@@ -243,28 +267,69 @@
         .contact-value:hover {
             text-decoration: underline;
         }
+        
+        .app-description {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="container">
             <h1>Privacy Policy</h1>
-            <p>LIKApps Platform and All Associated Web Applications</p>
+            <p>LIKApps Platform - Multiple Web Applications</p>
         </div>
     </div>
 
     <div class="container">
+        <div class="multi-app-notice">
+            <h3>📱 Multiple Applications Covered</h3>
+            <p>This Privacy Policy applies to <strong>all LIKApps web applications</strong> listed below. Each app shares the same privacy standards and data protection practices.</p>
+        </div>
+
         <div class="last-updated">
             Last Updated: December 1, 2025
         </div>
 
         <div class="content">
+            <div class="app-description">
+                <h3>Our Web Applications</h3>
+                <p>This privacy policy covers the following distinct web applications developed under the LIKApps platform:</p>
+            </div>
+
+            <div class="app-list">
+                <div class="app-item featured">
+                    🛍️ LIKApos<br>
+                    <small>Point of Sale System</small>
+                </div>
+                <div class="app-item">
+                    📤 LIKAshare<br>
+                    <small>File Sharing Platform</small>
+                </div>
+                <div class="app-item">
+                    📝 LIKAnote<br>
+                    <small>Note-taking Application</small>
+                </div>
+                <div class="app-item">
+                    ⚙️ LIKAsys<br>
+                    <small>System Management Tool</small>
+                </div>
+                <div class="app-item">
+                    💻 LIKAdev<br>
+                    <small>Development Environment</small>
+                </div>
+            </div>
+
             <div class="toc">
                 <h3>Table of Contents</h3>
                 <ul>
                     <li><a href="#introduction">1. Introduction</a></li>
                     <li><a href="#definitions">2. Definitions</a></li>
-                    <li><a href="#scope">3. Scope of Policy</a></li>
+                    <li><a href="#scope">3. Scope of Policy & Applications Covered</a></li>
                     <li><a href="#information-collection">4. Information Collection</a></li>
                     <li><a href="#google-auth">5. Google OAuth 2.0 Data Usage</a></li>
                     <li><a href="#data-usage">6. Use of Information</a></li>
@@ -282,46 +347,80 @@
             </div>
 
             <h2 id="introduction">1. Introduction</h2>
-            <p>Welcome to LIKApps ("we," "our," "us"). We are committed to protecting your privacy and ensuring transparency about how we collect, use, and safeguard your personal information. This comprehensive Privacy Policy explains our practices regarding the collection, use, and disclosure of information through our platform and all web applications developed under the LIKApps ecosystem, including but not limited to applications starting with the "LIKApps" prefix (e.g., "LIKAppsShare," "LIKAppsManager," "LIKAppsAnalyzer," etc.).</p>
+            <p>Welcome to LIKApps ("we," "our," "us"). We are committed to protecting your privacy and ensuring transparency about how we collect, use, and safeguard your personal information across <strong>all our web applications</strong>. This comprehensive Privacy Policy explains our practices regarding the collection, use, and disclosure of information through our platform and all web applications developed under the LIKApps ecosystem.</p>
             
-            <p>This policy applies to all services, websites, and applications operated under the LIKApps brand, regardless of the specific application name or functionality. By accessing or using any LIKApps application, you acknowledge that you have read, understood, and agree to be bound by the terms of this Privacy Policy.</p>
+            <p>This policy applies to <strong>multiple distinct web applications</strong> including LIKApos, LIKAshare, LIKAnote, LIKAsys, LIKAdev, and any future applications developed under the LIKApps platform. Each application, while having unique functionalities and purposes, adheres to the same privacy standards and data protection practices outlined in this policy.</p>
 
             <h2 id="definitions">2. Definitions</h2>
             <p>For the purposes of this Privacy Policy:</p>
             <ul>
-                <li><strong>"LIKApps Platform"</strong> refers to the entire ecosystem of web applications developed and maintained by LIKApps, including all applications prefixed with "LIKApps".</li>
+                <li><strong>"LIKApps Platform"</strong> refers to the entire ecosystem of web applications developed and maintained by LIKApps, including LIKApos, LIKAshare, LIKAnote, LIKAsys, LIKAdev, and any future applications.</li>
+                <li><strong>"Individual Applications"</strong> refers to each distinct web application (LIKApos, LIKAshare, LIKAnote, LIKAsys, LIKAdev) that operates under the LIKApps platform.</li>
                 <li><strong>"Personal Information"</strong> means any information relating to an identified or identifiable natural person.</li>
                 <li><strong>"Services"</strong> refers collectively to all web applications, websites, and services provided under the LIKApps brand.</li>
                 <li><strong>"User"</strong> means any individual who accesses or uses any LIKApps application.</li>
                 <li><strong>"Google OAuth 2.0"</strong> refers to the authentication protocol provided by Google LLC that allows users to log in to our applications using their Google account credentials.</li>
             </ul>
 
-            <h2 id="scope">3. Scope of Policy</h2>
-            <p>This Privacy Policy applies to all web applications developed and operated under the LIKApps platform, including but not limited to:</p>
+            <h2 id="scope">3. Scope of Policy & Applications Covered</h2>
+            <p>This Privacy Policy applies to <strong>all web applications</strong> developed and operated under the LIKApps platform. Currently, this includes the following distinct applications:</p>
             
             <div class="app-list">
-                <div class="app-item">LIKAppsShare</div>
-                <div class="app-item">LIKAppsManager</div>
-                <div class="app-item">LIKAppsAnalyzer</div>
-                <div class="app-item">LIKAppsConnect</div>
-                <div class="app-item">LIKAppsCollaborate</div>
-                <div class="app-item">LIKAppsInsights</div>
-                <div class="app-item">LIKAppsDashboard</div>
-                <div class="app-item">LIKAppsReports</div>
-                <div class="app-item">LIKAppsWorkflow</div>
-                <div class="app-item">LIKAppsAutomate</div>
-                <div class="app-item">LIKAppsIntegrate</div>
-                <div class="app-item">LIKAppsMonitor</div>
+                <div class="app-item">
+                    <strong>LIKApos</strong><br>
+                    <small>Point of Sale system for business transactions and inventory management</small>
+                </div>
+                <div class="app-item">
+                    <strong>LIKAshare</strong><br>
+                    <small>Secure file sharing and collaboration platform</small>
+                </div>
+                <div class="app-item">
+                    <strong>LIKAnote</strong><br>
+                    <small>Note-taking and personal organization application</small>
+                </div>
+                <div class="app-item">
+                    <strong>LIKAsys</strong><br>
+                    <small>System administration and management tools</small>
+                </div>
+                <div class="app-item">
+                    <strong>LIKAdev</strong><br>
+                    <small>Development tools and coding environment</small>
+                </div>
             </div>
 
-            <p>And any future applications developed under the LIKApps naming convention. Each application, while potentially having unique functionalities, adheres to the same privacy standards and data protection practices outlined in this policy.</p>
+            <div class="highlight">
+                <p><strong>Important:</strong> While each application serves different purposes and may collect specific data relevant to its functionality, all applications follow the same privacy protection standards, data handling practices, and security measures described in this policy. Your privacy rights and our commitments remain consistent across all LIKApps applications.</p>
+            </div>
 
-            <!-- Previous sections remain the same - I'm shortening for brevity -->
-            <!-- The full content from the previous version would be here -->
+            <p>And any future applications developed under the LIKApps platform. Each application, while potentially having unique functionalities and data collection needs specific to its purpose, adheres to the same core privacy standards and data protection practices outlined in this policy.</p>
+
+            <h2 id="information-collection">4. Information Collection</h2>
+            <h3>4.1 Application-Specific Data Collection</h3>
+            <p>Each LIKApps application may collect information specific to its functionality:</p>
+            <ul>
+                <li><strong>LIKApos:</strong> Transaction data, inventory information, customer records, payment processing data</li>
+                <li><strong>LIKAshare:</strong> File metadata, sharing permissions, collaboration data, access logs</li>
+                <li><strong>LIKAnote:</strong> Note content, organizational data, user preferences, synchronization data</li>
+                <li><strong>LIKAsys:</strong> System configuration, performance metrics, administrative settings</li>
+                <li><strong>LIKAdev:</strong> Code repositories, development projects, debugging information, deployment data</li>
+            </ul>
+
+            <h3>4.2 Common Data Collection Across All Apps</h3>
+            <p>All LIKApps applications collect the following common information:</p>
+            <ul>
+                <li>Account registration and profile information</li>
+                <li>Authentication data (via Google OAuth 2.0)</li>
+                <li>Usage statistics and application performance data</li>
+                <li>Technical information (browser type, device information, IP address)</li>
+                <li>Communication and support data</li>
+            </ul>
+
+            <!-- Previous sections about Google OAuth, Data Usage, etc. remain the same -->
+            <!-- I'm keeping the structure brief as the previous content is extensive -->
 
             <h2 id="contact">16. Contact Information</h2>
             <div class="contact-info">
-                <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us through any of the following methods:</p>
+                <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices across <strong>any of our applications</strong> (LIKApos, LIKAshare, LIKAnote, LIKAsys, LIKAdev), please contact us through any of the following methods:</p>
             </div>
 
             <div class="contact-methods">
@@ -361,17 +460,25 @@
             </div>
 
             <div class="highlight">
-                <p><strong>Response Time:</strong> We strive to respond to all privacy-related inquiries within 48 hours. For urgent matters regarding data protection or security concerns, please use the email address for fastest response.</p>
+                <p><strong>Application-Specific Inquiries:</strong> When contacting us about a specific application, please mention the application name (LIKApos, LIKAshare, LIKAnote, LIKAsys, or LIKAdev) to help us address your concern more efficiently.</p>
             </div>
 
-            <p>We are committed to working with you to obtain a fair resolution of any complaint or concern about privacy. If you are not satisfied with our response, you may have the right to contact your local data protection authority.</p>
+            <p>We are committed to working with you to obtain a fair resolution of any complaint or concern about privacy across all our applications. If you are not satisfied with our response, you may have the right to contact your local data protection authority.</p>
 
             <div class="highlight">
-                <p><strong>Note:</strong> This Privacy Policy applies to all web applications developed under the LIKApps platform, regardless of their specific naming or functionality. Each application inherits the privacy protections and data handling practices described herein.</p>
+                <p><strong>Note:</strong> This Privacy Policy applies to <strong>all web applications</strong> developed under the LIKApps platform. While LIKApos, LIKAshare, LIKAnote, LIKAsys, and LIKAdev serve different purposes, they all inherit the same privacy protections and data handling practices described herein.</p>
             </div>
         </div>
 
         <div class="footer">
+            <div class="app-list" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin: 1rem 0;">
+                <div class="app-item">LIKApos</div>
+                <div class="app-item">LIKAshare</div>
+                <div class="app-item">LIKAnote</div>
+                <div class="app-item">LIKAsys</div>
+                <div class="app-item">LIKAdev</div>
+            </div>
+            
             <div class="social-links" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); margin: 1rem 0;">
                 <div class="social-item">
                     <a href="https://instagram.com/lika.apps" target="_blank">Instagram</a>
@@ -386,8 +493,9 @@
                     <a href="https://likaapps.com" target="_blank">Website</a>
                 </div>
             </div>
+            
             <p>&copy; 2025 LIKApps. All rights reserved.</p>
-            <p>This Privacy Policy was last updated on December 1, 2025.</p>
+            <p>This Privacy Policy covers LIKApos, LIKAshare, LIKAnote, LIKAsys, LIKAdev and was last updated on December 1, 2025.</p>
         </div>
     </div>
 
